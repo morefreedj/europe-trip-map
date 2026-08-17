@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>巴塞罗那 · 巴黎 · 瑞士 · 米兰 — 欧洲三国 10 日行程</title>
+<meta name="description" content="2025.9.23 - 10.2 西班牙巴塞罗那 → 法国巴黎 → 瑞士卢塞恩/因特拉肯/少女峰 → 意大利米兰">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #f5f5f7;
+  --bg-tertiary:   #fbfbfd;
+  --bg-grouped:    #f2f2f7;
+  --bg-elevated:   #ffffff;
+  --text-primary:   #1d1d1f;
+  --text-secondary: #86868b;
+  --text-tertiary:  #aeaeb2;
+  --accent:        #0071e3;
+  --accent-hover:  #0077ed;
+  --tint-red:    #ff3b30;
+  --tint-orange: #ff9500;
+  --tint-green:  #34c759;
+  --tint-blue:   #007aff;
+  --tint-purple: #af52de;
+  --tint-pink:   #ff2d55;
+  --separator:  rgba(60, 60, 67, .12);
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:  0 4px 14px rgba(0,0,0,.08);
+  --shadow-lg:  0 8px 30px rgba(0,0,0,.12);
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+               "Helvetica Neue", "Arial", sans-serif;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+#map { width: 100%; height: 40vh; min-height: 280px; position: sticky; top: 0; z-index: 100; }
+.locate-btn {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(8px);
+  border: none; box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.locate-btn.active { color: #007aff; }
+@keyframes loc-pulse {
+  0%   { transform: scale(1); opacity: .55; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.loc-pulse {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: rgba(0,122,255,.25);
+  animation: loc-pulse 1.6s ease-out infinite;
+}
+
+.tabs {
+  display: flex; gap: 6px; padding: 12px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  background: rgba(255,255,255,.85); -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px); position: sticky; top: 40vh; z-index: 99;
+  border-bottom: .5px solid var(--separator); scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0; padding: 7px 16px; border-radius: 980px; border: none;
+  background: var(--bg-grouped); color: var(--text-secondary);
+  font-size: 13px; font-weight: 500; cursor: pointer; transition: all .25s ease;
+  white-space: nowrap; letter-spacing: -0.01em;
+}
+.tab:active { transform: scale(.96); }
+.tab.active { background: var(--accent); color: #fff; }
+
+.content { max-width: 680px; margin: 0 auto; padding: 16px 16px calc(24px + var(--safe-bottom)); }
+
+.hero { text-align: center; padding: 28px 20px 20px; }
+.hero h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
+.hero .subtitle { font-size: 15px; color: var(--text-secondary); margin-top: 6px; font-weight: 400; }
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.info-card { background: var(--bg-elevated); border-radius: var(--radius-lg); padding: 16px; box-shadow: var(--shadow-sm); }
+.info-card .label { font-size: 12px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .02em; margin-bottom: 6px; }
+.info-card .value { font-size:瓷5px; font-weight: 600; line-height: 1.4; }
+
+.section-head { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .03em; padding: 20px 0 8px; }
+
+.day-head { padding: 20px 0 12px; }
+.day-head h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+.day-head p { font-size: 15px; color: var(--text-secondary); margin-top: 2px; }
+
+.route-bar { background: var(--bg-elevated); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px; box-shadow: var(--shadow-sm); font-size: 13px; color: var(--text-secondary); line-height: 1.7; white-space: pre-line; }
+.route-bar strong { color: var(--text-primary); }
+
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 20px; bottom: 20px; width: 1.5px; background: var(--separator); }
+.tl-item { position: relative; margin-bottom: 10px; }
+.tl-dot { position: absolute; left: -20px; top: 18px; width: 10px; height: 10px; border-radius: 50%; z-index: 1; box-shadow: 0 0 0 3px var(--bg-secondary); }
+.tl-dot.food    { background: var(--tint-red); }
+.tl-dot.spot    { background: var(--tint-blue); }
+.tl-dot.hotel   { background: var(--tint-orange); }
+.tl-dot.drink   { background: var(--tint-purple); }
+.tl-dot.transport { background: var(--text-tertiary); }
+
+.card { background: var(--bg-elevated); border-radius: var(--radius-md); padding: 14px 16px; box-shadow: var(--shadow-sm); transition: box-shadow .25s ease; cursor: pointer; }
+.card:active { box-shadow: var(--shadow-md); }
+.card .time { font-size: 12px; font-weight: 600; color: var(--text-tertiary); letter-spacing: .01em; }
+.card .name { font-size: 17px; font-weight: 600; margin: 2px 0 4px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 6px; }
+.card .desc { font-size: 14px; color: var(--text-secondary); line-height: 1.45; }
+
+.badge { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 4px; }
+.badge.food   { background: rgba(255,59,48,.1);  color: var(--tint-red); }
+.badge.spot   { background: rgba(0,122,255,.1);  color: var(--tint-blue); }
+.badge.drink  { background: rgba(175,82,222,.1); color: var(--tint-purple); }
+
+.budget { display: inline-block; margin-top: 6px; padding: 3px 10px; background: var(--bg-grouped); border-radius: var(--radius-sm); font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+.pays { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.pay { font-size: 11px; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+.pay.ok  { background: rgba(52,199,89,.1);  color: var(--tint-green); }
+.pay.no  { background: rgba(255,59,48,.08); color: var(--tint-red); }
+.pay.idk { background: rgba(255,149,0,.1);  color: var(--tint-orange); }
+
+.links { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 8px 14px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+  text-decoration: none !important; transition: filter .2s;
+}
+.btn:active { filter: brightness(.9); }
+.btn.nav    { background: var(--accent); color: #fff; }
+.btn.xhs    { background: #ff2442; color: #fff; }
+.btn.dp     { background: #ffa700; color: #fff; }
+.btn.rsv    { background: var(--tint-green); color: #fff; }
+
+.as-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.35); backdrop-filter: blur(2px);
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .25s;
+}
+.as-overlay.show { opacity: 1; pointer-events: auto; }
+.as-sheet {
+  width: 100%; max-width: 420px;
+  padding: 0 8px 34px;
+  transform: translateY(100%); transition: transform .3s cubic-bezier(.22,1,.36,1);
+}
+.as-overlay.show .as-sheet { transform: translateY(0); }
+.as-group {
+  background: rgba(255,255,255,.88); backdrop-filter: blur(20px);
+  border-radius: 14px; overflow: hidden; margin-bottom: 8px;
+}
+.as-group .as-item {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px; font-size: 18px; color: #007aff; font-weight: 500;
+  border: none; background: none; width: 100%; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.as-group .as-item + .as-item { border-top: .5px solid rgba(0,0,0,.12); }
+.as-group .as-item:active { background: rgba(0,0,0,.06); }
+.as-cancel { font-weight: 600; }
+
+.details {
+  margin-top: 10px; padding-top: 10px;
+  border-top: .5px solid var(--separator);
+  font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+}
+.details.closed { display: none; }
+
+.day-list .card { margin-bottom: 8px; }
+.day-list .card .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+.pay-summary { background: var(--bg-elevated); border-radius: var(--radius-md); padding: 14px 16px; box-shadow: var(--shadow-sm); font-size: 13px; line-height: 1.7; margin-bottom: 10px; }
+.pay-summary h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.pay-summary .warn { color: var(--tint-red); }
+.pay-summary .ok-text { color: var(--tint-green); }
+
+.legend { display: flex; gap: 14px; flex-wrap: wrap; padding: 8px 0; font-size: 12px; color: var(--text-secondary); }
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+.leaflet-popup-content-wrapper { border-radius: var(--radius-md) !important; box-shadow: var(--shadow-lg) !important; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif !important; }
+.leaflet-popup-content { font-size: 14px !important; line-height: 1.5 !important; margin: 12px 14px !important; }
+.leaflet-popup-content a { color: var(--accent) !important; }
+.leaflet-popup-tip { background: #fff !important; }
+.leaflet-control-zoom a { width: 34px !important; height: 34px !important; line-height: 34px !important; font-size: 16px !important; border-radius: 10px !important; background: rgba(255,255,255,.85) !important; -webkit-backdrop-filter: blur(10px) !important; backdrop-filter: blur(10px) !important; border: .5px solid var(--separator) !important; color: var(--text-primary) !important; }
+.leaflet-control-zoom { border-radius: 12px !important; overflow: hidden; box-shadow: var(--shadow-md) !important; border: none !important; }
+.leaflet-control-attribution { font-size: 9px !important; opacity: .5; }
+</style>
+</head>
+<body>
+
+<div id="map"></div>
+<div class="tabs" id="tabs"></div>
+<div class="content" id="content"></div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  DATA — 10-Day Europe Trip                                  ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+const HOTEL = { name: '欧洲三国行程', lat: 47.3769, lng: 8.5417 };
+
+const DAYS = [
+  { id: 0, label: '总览', color: '#0071e3', locations: [] },
+
+  // ── D1 ──
+  { id: 1, label: 'D1', date: '9.23 周三', title: '抵达巴塞罗那', color: '#ff9500', locations: [
+    { name: '巴塞罗那机场 (BCN)', lat: 41.2974, lng: 2.0833, type: 'transport', time: '中午', desc: '飞机抵达巴塞罗那', detail: '入关取行李，乘 Aerobús 或地铁 L9 前往市区', gmap: 'Barcelona+Airport+BCN' },
+    { name: '圣家堂 Sagrada Família', lat: 41.4036, lng: 2.1744, type: 'spot', time: '下午', desc: '高迪未完成的旷世杰作，务必提前预约门票', detail: '登塔需额外预约，建议选诞生立面塔楼。地铁 L2/L5 Sagrada Família 站直达', gmap: 'Sagrada+Família+Barcelona', reserve: 'https://sagradafamilia.org/en/tickets' },
+    { name: '哥特区 Gothic Quarter', lat: 41.3839, lng: 2.1761, type: 'spot', time: '傍晚', desc: '中世纪老城漫步，巴塞罗那主教堂、国王广场', detail: '狭窄石板路，注意随身财物。可从兰布拉大道步行进入', gmap: 'Gothic+Quarter+Barcelona' },
+    { name: '兰布拉大道 La Rambla', lat: 41.3802, lng: 2.1734, type: 'spot', time: '傍晚', desc: '巴塞罗那最著名的大道，街头艺人、花店、市场', detail: '波盖利亚市场 Mercat de la Boqueria 值得一逛，但注意扒手', gmap: 'La+Rambla+Barcelona' },
+    { name: '巴塞罗那酒店', lat: 41.3874, lng: 2.1686, type: 'hotel', time: '晚上', desc: '入住巴塞罗那酒店', gmap: 'hotel+Barcelona+Eixample' }
+  ]},
+
+  // ── D2 ──
+  { id: 2, label: 'D2', date: '9.24 周四', title: '高迪建筑巡礼', color: '#ff9500', locations: [
+    { name: '米拉之家 Casa Milà', lat: 41.3954, lng: 2.1618, type: 'spot', time: '上午', desc: '高迪最后一座民用建筑，波浪形外墙和屋顶烟囱', detail: '又名 La Pedrera（采石场），屋顶必看。地铁 L3/L5 Diagonal 站', gmap: 'Casa+Milà+Barcelona', reserve: 'https://www.lapedrera.com/en/visits' },
+    { name: '巴特罗之家 Casa Batlló', lat: 41.3916, lng: 2.1650, type: 'spot', time: '下午', desc: '高迪的海洋童话世界，龙脊屋顶和彩色马赛克', detail: '位于格拉西亚大道 Passeig de Gràcia，与米拉之家步行 5 分钟', gmap: 'Casa+Batlló+Barcelona', reserve: 'https://www.casabatllo.es/en/' },
+    { name: '格拉西亚大道 Passeig de Gràcia', lat: 41.3935, lng: 2.1635, type: 'spot', time: '傍晚', desc: '巴塞罗那的香榭丽舍，奢侈品与设计师品牌云集', detail: '两侧高迪建筑林立，适合逛街和晚餐', gmap: 'Passeig+de+Gràcia+Barcelona' },
+    { name: '巴塞罗那酒店', lat: 41.3874, lng: 2.1686, type: 'hotel', time: '晚上', desc: '入住巴塞罗那酒店', gmap: 'hotel+Barcelona+Eixample' }
+  ]},
+
+  // ── D3 ──
+  { id: 3, label: 'D3', date: '9.25 周五', title: '巴塞罗那 → 巴黎', color: '#ff9500', locations: [
+    { name: '古埃尔公园 Park Güell', lat: 41.4145, lng: 2.1527, type: 'spot', time: '白天', desc: '高迪的童话花园，马赛克蜥蜴和波浪长椅', detail: '需提前购票，核心区限流。公交 24 路或地铁 L3 Lesseps 站步行 20 分钟', gmap: 'Park+Güell+Barcelona', reserve: 'https://parkguell.barcelona/en' },
+    { name: '巴塞罗那机场 (BCN)', lat: 41.2974, lng: 2.0833, type: 'transport', time: '傍晚', desc: '晚间航班 / 夜班高铁前往巴黎', detail: '航班约 去打 2h，高铁约 6.5h。预留取行李和安检时间', gmap: 'Barcelona+Airport+BCN' },
+    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '夜间', desc: '抵达巴黎，入住酒店', gmap: 'hotel+Paris+center' }
+  ]},
+
+  // ── D4 ──
+  { id: 4, label: 'D4', date: '9.26 周六', title: '巴黎右岸经典', color: '#007aff', locations: [
+    { name: '奥赛博物馆 Musée d\'Orsay', lat: 48.8600, lng: 2.3266, type: 'spot', time: '11:00', desc: '印象派殿堂，莫奈、梵高、雷诺阿，参观上限 3h', detail: '由旧火车站改建。设置 13:30 离场闹钟。RER C 线 Musée d\'Orsay 站', gmap: 'Musée+d\'Orsay+Paris', reserve: 'https://www.musee-orsay.fr/en' },
+    { name: '塞纳左岸午餐', lat: 48.8530, lng: 2.3375, type: 'food', time: '13:30', desc: '左岸简餐，Rue de Buci 或 Saint-Germain 区域', detail: '推荐法式简餐或可丽饼，不占用太多时间', gmap: 'restaurant+Saint+Germain+Paris' },
+    { name: '协和广场 Place de la Concorde', lat: 48.8656, lng: 2.3211, type: 'spot', time: '~15:00', desc: '巴黎最大广场，卢克索方尖碑，短暂停留', detail: '地铁 M1/M8/M12 Concorde 站。从奥赛沿塞纳河步行约 二三 分钟', gmap: 'Place+de+la+Concorde+Paris' },
+    { name: '凯旋门 Arc de Triomphe', lat: 48.8738, lng: 2.2950, type: 'spot', time: '~15:30', desc: '只外观，不登顶。香榭丽舍大道西端', detail: '地铁 M1 Charles de Gaulle-Étoile 站。从协和广场 M1 直达', gmap: 'Arc+de+Triomphe+Paris' },
+    { name: '埃菲尔铁塔 Tour Eiffel', lat: 48.8584, lng: 2.2945, type: 'spot', time: '傍晚~日落', desc: '战神广场看日落，等到天黑看整点闪灯', detail: '闪灯在日落后整点开始，持续 5 分钟。地铁 M6 Bir-Hakeim 或 RER C Champ de Mars', gmap: 'Tour+Eiffel+Paris' },
+    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '晚上', desc: '返回巴黎酒店', gmap: 'hotel+Paris+center' }
+  ]},
+
+  // ── D5 ──
+  { id: 5, label: 'D5', date: '9.27 周日', title: '巴黎左岸艺术 & 蒙马特日落', color: '#007aff', locations: [
+    { name: '橘园美术馆 Musée de l\'Orangerie', lat: 48.8638, lng: 2.3226, type: 'spot', time: '10:00', desc: '莫奈睡莲巨幅环厅，11:30 离场', detail: '位于杜乐丽花园内。地铁 M1/M8/M12 Concorde 站', gmap: 'Musée+de+l\'Orangerie+Paris', reserve: 'https://www.musee-orangerie.fr/en' },
+    { name: '杜乐丽花园 Jardin des Tuileries', lat: 48.8636, lng: 2.3276, type: 'spot', time: '11:30', desc: '巴黎最著名的法式园林，绿色躺椅晒太阳', detail: '橘园出来即是，可沿中轴线走向卢浮宫方向', gmap: 'Jardin+des+Tuileries+Paris' },
+    { name: '市中心午餐', lat: 48.8610, lng: 2.3358, type: 'food', time: '~12:30', desc: '巴黎市中心午餐', detail: '推荐 Rue Saint-Honoré 或 Palais Royal 周边', gmap: 'restaurant+Palais+Royal+Paris' },
+    { name: '巴黎歌剧院 Opéra Garnier', lat: 48.8720, lng: 2.3316, type: 'spot', time: '~14:00', desc: '外观打卡，新巴洛克风格杰作', detail: '地铁 M3/M7/M8 Opéra 站。如时间充裕可购票入内参观', gmap: 'Opéra+Garnier+Paris' },
+    { name: '蒙马特高地 Montmartre', lat: 48.8867, lng: 2.3431, type: 'spot', time: '16:00', desc: '错峰上高地，圣心大教堂、小丘广场，看日落俯瞰巴黎', detail: '避开了 14-16 点人流高峰。地铁 M12 Abbesses 或 M2 Anvers。注意保管随身财物，警惕手环骗局', gmap: 'Montmartre+Paris' },
+    { name: '蒙马特晚餐', lat: 48.8860, lng: 2.3405, type: 'food', time: '日落', desc: '下山后在蒙马特周边晚餐', detail: '推荐 Rue des Abbesses 或 Rue Lepic 的法式小馆', gmap: 'restaurant+Montmartre+Paris' },
+    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '晚上', desc: '返回巴黎酒店', gmap: 'hotel+Paris+center' }
+  ]},
+
+  // ── D6 ──
+  { id: 6, label: 'D6', date: '9.28 周一', title: '卢浮宫 & 西岱岛', color: '#007aff', locations: [
+    { name: '卢浮宫 Musée du Louvre', lat: 48.8606, lng: 2.3376, type: 'spot', time: '11:00', desc: '只看三大件：蒙娜丽莎、胜利女神、米洛的维纳斯', detail: '14:20 强制离场。务必准时预约，从金字塔入口或 Carrousel du Louvre 商场入口进入人较少。地铁 M1/M7 Palais Royal-Musée du Louvre', gmap: 'Musée+du+Louvre+Paris', reserve: 'https://www.louvre.fr/en' },
+    { name: '西岱岛午餐', lat: 48.8545, lng: 2.3455, type: 'food', time: '~14:30', desc: '西岱岛简餐，速战速决', detail: '推荐拉丁区或 Île Saint-Louis 的简餐，不慢吃预留安检时间', gmap: 'restaurant+Île+de+la+Cité+Paris' },
+    { name: '圣礼拜堂 Sainte-Chapelle', lat: 48.8554, lng: 2.3450, type: 'spot', time: '16:00', desc: '巴黎最美的彩绘玻璃教堂，16:00 入场', detail: '位于司法宫 Palais de Justice 内，需过安检。务必准时', gmap: 'Sainte+Chapelle+Paris', reserve: 'https://www.sainte-chapelle.fr/en' },
+    { name: '巴黎圣母院外景', lat: 48.8530, lng: 2.3499, type: 'spot', time: '~17:00', desc: '巴黎圣母院外观，仍在修复中', detail: '从圣礼拜堂步行 5 分钟。可在广场和塞纳河畔拍照', gmap: 'Notre+Dame+de+Paris' },
+    { name: '西岱岛 & 塞纳河闲逛', lat: 48.8535, lng: 2.3480, type: 'spot', time: '傍晚', desc: '西岱岛漫步，塞纳河畔散步', detail: '可逛 Île Saint-Louis 的贝蒂咏冰淇淋 Berthillon', gmap: 'Île+de+la+Cité+Paris' },
+    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '晚上', desc: '返回巴黎酒店', gmap: 'hotel+Paris+center' }
+  ]},
+
+  // ── D7 ──
+  { id: 7, label: 'D7', date: '9.29 周二', title: '巴黎 → 卢塞恩', color: '#34c759', locations: [
+    { name: '巴黎里昂站 Gare de Lyon', lat: 48.8448, lng: 2.3735, type: 'transport', time: '07:22', desc: 'TGV Lyria 前往巴塞尔，10:26 抵达', detail: '提前购票，建议提前 30 分钟到站。地铁 M1/M14 Gare de Lyon', gmap: 'Gare+de+Lyon+Paris', reserve: 'https://www.sncf-connect.com/en-en/tgv-lyria' },
+    { name: '巴塞尔 SBB Basel SBB', lat: 47.5474, lng: 7.5900, type: 'transport', time: '10:26', desc: '站内换乘，前往卢塞恩', detail: '瑞士通票覆盖，站内换乘约 10 分钟', gmap: 'Basel+SBB+station' },
+    { name: '卢塞恩 Luzern', lat: 47.0502, lng: 8.3093, type: 'transport', time: '11:35', desc: '抵达卢塞恩，酒店寄存行李', detail: '瑞士通票直达，车站步行可达市中心', gmap: 'Luzern+station' },
+    { name: '垂死狮子纪念碑 Löwendenkmal', lat: 47.0583, lng: 8.3108, type: 'spot', time: '下午', desc: '马克·吐温笔下"世界上最悲伤的石头"', detail: '从火车站步行约 15 分钟', gmap: 'Lion+Monument+Lucerne' },
+    { name: '卡佩尔廊桥 Kapellbrücke', lat: 47.0516, lng: 8.3075, type: 'spot', time: '下午', desc: '欧洲最古老的木桥，卢塞恩地标', detail: '桥内三角壁画描绘卢塞恩历史。位于市中心，步行可达', gmap: 'Kapellbrücke+Lucerne' },
+    { name: '琉森湖畔散步', lat: 47.0520, lng: 8.3058, type: 'spot', time: '下午', desc: '琉森湖畔漫步，远眺皮拉图斯山和瑞吉山', detail: '湖边步道从火车站延伸至瑞士交通博物馆', gmap: 'Lake+Lucerne+promenade' },
+    { name: '卢塞恩酒店', lat: 47.0502, lng: 8.3093, type: 'hotel', time: '傍晚', desc: '入住卢塞恩酒店', gmap: 'hotel+Lucerne' }
+  ]},
+
+  // ── D8 ──
+  { id: 8, label: 'D8', date: '9.30 周三', title: '黄金列车 → 因特拉肯', color: '#34c759', locations: [
+    { name: '卢塞恩火车站', lat: 47.0502, lng: 8.3093, type: 'transport', time: '上午', desc: '黄金观景列车 Luzern-Interlaken Express 出发', detail: '坐右侧观赏龙疆湖 Lungernsee 和布里恩茨湖 Brienzersee。瑞士通票免费，不需强制订座', gmap: 'Luzern+station' },
+    { name: '布里恩茨 Brienz', lat: 46.7545, lng: 8.0333, type: 'spot', time: '途中', desc: '可选短暂下车打卡湖边，布里恩茨湖碧蓝如宝石', detail: '如时间充裕可下车拍照，再乘下一班继续前往因特拉肯', gmap: 'Brienz+Switzerland' },
+    { name: '因特拉肯东站 Interlaken Ost', lat: 46.6904, lng: 7.8688, type: 'transport', time: '中午', desc: '抵达因特拉肯，入住酒店', gmap: 'Interlaken+Ost+station' },
+    { name: 'Hoheweg 草坪', lat: 46.6865, lng: 7.8580, type: 'spot', time: '下午', desc: '因特拉肯主街大草坪，远眺少女峰群山', detail: '天气好时可见少女峰、僧侣峰、艾格峰三峰并列', gmap: 'Hoheweg+Interlaken' },
+    { name: '超市采购', lat: 46.6870, lng: 7.8595, type: 'food', time: '傍晚', desc: 'Coop / Migros 采购次日上山零食和水', detail: '因特拉肯东站附近有 Coop 超市，山上物价高建议提前采购', gmap: 'Coop+Interlaken+Ost' },
+    { name: '因特拉肯东站酒店', lat: 46.6904, lng: 7.8688, type: 'hotel', time: '晚上', desc: '入住因特拉肯东站酒店', gmap: 'hotel+Interlaken+Ost' }
+  ]},
+
+  // ── D9 ──
+  { id: 9, label: 'D9', date: '10.1 周四', title: '少女峰欧洲之巅', color: '#34c759', locations: [
+    { name: '格林德瓦航站楼 Grindelwald Terminal', lat: 46.6237, lng: 8.0388, type: 'transport', time: '08:30', desc: '艾格快线 Eiger Express 缆车出发', detail: '从因特拉肯东站乘火车到 Grindelwald Terminal 约 30 分钟。瑞士通票登山票 75 折', gmap: 'Grindelwald+Terminal' },
+    { name: '少女峰 Jungfraujoch', lat: 46.5474, lng: 7.9833, type: 'spot', time: '~10:00', desc: '欧洲之巅 Top of Europe，山顶停留 2.5h', detail: '斯芬克斯观景台 Sphinx Observatory、万年冰宫 Ice Palace、冰川平台 Plateau。海拔 3454m，注意高反', gmap: 'Jungfraujoch+Top+of+Europe', reserve: 'https://www.jungfrau.ch/en-gb/jungfraujoch-top-of-europe/' },
+    { name: '劳特布伦嫩 Lauterbrunnen', lat: 46.5936, lng: 7.9091, type: 'spot', time: '下山途中', desc: '72 条瀑布的山谷，施陶河瀑布拍照', detail: '从少女峰下山经 Kleine Scheidegg 换乘到 Lauterbrunnen', gmap: 'Lauterbrunnen+waterfall' },
+    { name: '因特拉肯东站酒店', lat: 46.6904, lng: 7.8688, type: 'hotel', time: '傍晚', desc: '返回因特拉肯', gmap: 'hotel+Interlaken+Ost' }
+  ]},
+
+  // ── D10 ──
+  { id: 10, label: 'D10', date: '10.2 周五', title: 'First 山 → 米兰', color: '#af52de', locations: [
+    { name: '因特拉肯东站', lat: 46.6904, lng: 7.8688, type: 'transport', time: '上午', desc: '退房，大件行李寄存车站储物柜，轻装上山', detail: '车站有投币储物柜 locker', gmap: 'Interlaken+Ost+station' },
+    { name: '格林德瓦 Grindelwald', lat: 46.6243, lng: 8.0375, type: 'spot', time: '上午', desc: '火车到格林德瓦，缆车上 First 山', detail: 'First 缆车通票 5 折线上购票', gmap: 'Grindelwald+First+bahn', reserve: 'https://www.jungfrau.ch/en-gb/grindelwaldfirst/' },
+    { name: 'First 悬崖栈道 First Cliff Walk', lat: 46.6580, lng: 8.0660, type: 'spot', time: '上午', desc: '悬崖栈道，俯瞰格林德瓦山谷', detail: '免费，缆车到顶即是', gmap: 'First+Cliff+Walk+Grindelwald' },
+    { name: 'Bachalpsee 高山湖', lat: 46.6680, lng: 8.0800, type: 'spot', time: '上午~中午', desc: '阿尔卑斯高山湖，倒映雪山', detail: '从 First 步行约 1h 单程，路况良好。可选山地卡丁车 Mountain Cart 下山', gmap: 'Bachalpsee+Grindelwald' },
+    { name: '因特拉肯东站', lat: 46.6904, lng: 7.8688, type: 'transport', time: '17:30', desc: '17:30 前下山返回因特拉肯，取行李', detail: '务必准时下山，预留取行李时间', gmap: 'Interlaken+Ost+station' },
+    { name: '因特拉肯 → 米兰', lat: 46.0050, lng: 8.9500, type: 'transport', time: '傍晚', desc: '跨国火车前往米兰，傍晚抵达', detail: '经 Brig/Domodossola 进入意大利。跨国火车票提前买', gmap: 'Interlaken+to+Milan+train' },
+    { name: '米兰酒店', lat: 45.4642, lng: 9.1900, type: 'hotel', time: '晚上', desc: '抵达米兰，入住酒店', gmap: 'hotel+Milan+center' }
+  ]}
+];
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  OVERVIEW CONTENT                                           ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+function overviewContent() {
+  return `
+<div class="hero"><h1>巴塞罗那 · 巴黎 · 瑞士 · 米兰</h1><p class="subtitle">2025.9.23 — 10.2 · 欧洲三国 10 日经典路线</p></div>
+<div class="info-grid">
+  <div class="info-card"><div class="label">天数</div><div class="value">10 天</div></div>
+  <div class="info-card"><div class="label">国家</div><div class="value">西班牙 · 法国 · 瑞士 · 意大利</div></div>
+  <div class="info-card"><div class="label">城市</div><div class="value">巴塞罗那 → 巴黎 → 卢塞恩 → 因特拉肯 → 米兰</div></div>
+  <div class="info-card"><div class="label">交通</div><div class="value">飞机 · TGV · 黄金列车 · 跨国火车</div></div>
+</div>
+<div class="section-head">行程概览</div>
+<div class="day-list">${DAYS.slice(1).map(d=>`<div class="card" onclick="go(${d.id})"><div class="name"><span class="dot" style="background:${d.color}"></span>${d.label} · ${d.title}</div><div class="desc">${d.date}</div></div>`).join('')}</div>
+<div class="section-head">关键提醒</div>
+<div class="pay-summary">
+  <h4>🎫 必须提前预约</h4>
+  <p>圣家堂、米拉之家、巴特罗之家、古埃尔公园、奥赛博物馆、橘园美术馆、卢浮宫、圣礼拜堂、少女峰登山票、First 山缆车 — <span class="warn">全部需提前线上购票预约</span></p>
+</div>
+<div class="pay-summary">
+  <h4>🚂 交通关键</h4>
+  <p>巴黎-巴塞尔 TGV Lyria 提前购票；瑞士通票覆盖黄金列车和巴塞尔-卢塞恩段；因特拉肯→米兰跨国火车提前买；少女峰登山票瑞士通票 75 折</p>
+</div>
+<div class="pay-summary">
+  <h4>⚠️ 安全提醒</h4>
+  <p>巴塞罗那兰布拉大道/哥特区注意扒手；巴黎蒙马特警惕手环骗局、保管随身财物；地铁上注意手机和钱包</p>
+</div>
+<div class="section-head">图例</div>
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-red)"></div>餐厅</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-blue)"></div>景点</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--tint-orange)"></div>酒店</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--text-tertiary)"></div>交通</div>
+</div>`;
+}
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  ENGINE — Do not modify below                               ║
+// ╚══════════════════════════════════════════════════════════════╝
+
+const map = L.map('map', { center: [HOTEL.lat || 47.37, HOTEL.lng || 8.54], zoom: 5, zoomControl: false, attributionControl: true });
+L.control.zoom({ position: 'topright' }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 19 }).addTo(map);
+
+const LocateControl = L.Control.extend({
+  options: { position: 'bottomright' },
+  onAdd() {
+    const btn = L.DomUtil.create('button', 'locate-btn');
+    btn.innerHTML = '📍';
+    btn.title = '我的位置';
+    L.DomEvent.disableClickPropagation(btn);
+    btn.addEventListener('click', () => {
+      btn.classList.add('active');
+      map.locate({ setView: true, maxZoom: 15 });
+    });
+    this._btn = btn;
+    return btn;
+  }
+});
+new LocateControl().addTo(map);
+let locMarker, locCircle;
+map.on('locationfound', e => {
+  const r = e.accuracy / 2;
+  if (locMarker) { locMarker.setLatLng(e.latlng); locCircle.setLatLng(e.latlng).setRadius(r); }
+  else {
+    locMarker = L.marker(e.latlng, {
+      icon: L.divIcon({ className:'', html:'<div style="width:14px;height:14px;border-radius:50%;background:#007aff;border:2.5px solid #fff;box-shadow:0 0 6px rgba(0,122,255,.5)"></div><div class="loc-pulse" style="position:absolute;top:0;left:0"></div>', iconSize:[14,14], iconAnchor:[7,7] }),
+      zIndexOffset: 2000
+    }).addTo(map);
+    locCircle = L.circle(e.latlng, { radius: r, color: '#007aff', fillColor: '#007aff', fillOpacity: .08, weight: 1 }).addTo(map);
+  }
+});
+map.on('locationerror', () => {});
+
+function icon(color, emoji) {
+  return L.divIcon({ className: '', html: `<div style="width:28px;height:28px;border-radius:50%;background:${color};border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.18)">${emoji||''}</div>`, iconSize: [28,28], iconAnchor: [14,14], popupAnchor: [0,-16] });
+}
+
+let markers = [], polylines = [];
+const emojis = { food:'🍽️', spot:'📍', hotel:'🏨', transport:'🚃', drink:'🍺' };
+
+function clearMap() { markers.forEach(m=>map.removeLayer(m)); polylines.forEach(p=>map.removeLayer(p)); markers=[]; polylines=[]; }
+
+function showDay(idx) {
+  clearMap();
+  if (idx === 0) {
+    const pts = [];
+    DAYS.forEach(d => d.locations.forEach(l => { if(l.lat) pts.push([l.lat,l.lng]); }));
+    if(pts.length) map.fitBounds(pts, {padding:[30,30]});
+    DAYS.slice(1).forEach(d => {
+      d.locations.filter(l=>l.time!=='—').forEach(l => {
+        const m = L.circleMarker([l.lat,l.lng], { radius:4, fillColor:d.color, color:'#fff', weight:1.5, fillOpacity:.9 }).addTo(map).bindPopup(`<b>${l.name}</b><br><span style="color:#86868b">${d.label}</span>`);
+        markers.push(m);
+      });
+    });
+    return;
+  }
+  const day = DAYS.find(d=>d.id===idx);
+  if(!day) return;
+  const coords = [];
+  day.locations.forEach(l => {
+    if(!l.lat) return;
+    const m = L.marker([l.lat,l.lng], { icon: icon(day.color, emojis[l.type]||'📌') }).addTo(map);
+    const gmapQ = l.gmap||encodeURIComponent(l.name);
+    m.bindPopup(`<b>${l.name}</b>${l.time!=='—'?'<br><span style="color:#86868b">'+l.time+'</span>':''}<br>${l.desc}${l.budget?'<br><span style="color:#ff9500">'+l.budget+'</span>':''}<br><a href="#" onclick="event.preventDefault();openAS('${l.name.replace(/'/g,"\\'")}',${l.lat},${l.lng},'${gmapQ}')">📍 导航</a>`);
+    markers.push(m);
+    if(l.time!=='—') coords.push([l.lat,l.lng]);
+  });
+  if(coords.length>1) { const pl = L.polyline(coords, { color:day.color, weight:2.5, opacity:.5, dashArray:'6,5' }).addTo(map); polylines.push(pl); }
+  if(coords.length) map.fitBounds(coords, { padding:[40,40], maxZoom:14 });
+}
+
+function payChips(pay) {
+  if(!pay) return '';
+  let h = '<div class="pays">';
+  const m = { cash:'💴', card:'💳', suica:'Suica', paypay:'PayPay', alipay:'支付宝', wechat:'微信' };
+  for(const [k,label] of Object.entries(m)) {
+    if(pay[k]!==undefined) { const c = pay[k]===1?'ok':pay[k]===0.5?'idk':'no'; h += `<span class="pay ${c}">${label}</span>`; }
+  }
+  return h+'</div>';
+}
+
+const IN_APP_WEBVIEW = (() => {
+  const ua = (navigator.userAgent || '').toLowerCase();
+  return /micromessenger|xhs|xhsdiscover|discover\/|tiktok|aweme|weibo|qq\/|qqbrowser|alipayclient|dingtalk|lark|feishu|ucbrowser|baiduboxapp|toutiao|newsarticle/.test(ua);
+})();
+
+function locCard(loc, dayIdx) {
+  const dot = loc.type==='food'?'food':loc.type==='spot'?'spot':loc.type==='drink'?'drink':loc.type==='hotel'?'hotel':'transport';
+  const bdg = loc.type==='food'?'<span class="badge food">餐</span>':loc.type==='spot'?'<span class="badge spot">景</span>':loc.type==='drink'?'<span class="badge drink">饮</span>':'';
+  const uid = `d${dayIdx}-${loc.name.replace(/\W/g,'')}`;
+  const gmapQ = loc.gmap||encodeURIComponent(loc.name);
+  let lnk = `<button class="btn nav" onclick="openAS('${loc.name.replace(/'/g,"\\'")}',${loc.lat},${loc.lng},'${gmapQ}')">📍 导航</button>`;
+  if(loc.reserve) lnk += `<a href="${loc.reserve}" target="_blank" class="btn rsv">📅 预约</a>`;
+  return `<div class="tl-item"><div class="tl-dot ${dot}"></div><div class="card" onclick="if(!event.target.closest('.btn,.links'))toggle('${uid}')"><div class="time">${loc.time!=='—'?loc.time:'备选'}</div><div class="name">${bdg} ${loc.name}</div><div class="desc">${loc.desc}</div>${loc.budget?'<div class="budget">'+loc.budget+'</div>':''}${payChips(loc.pay)}<div class="links">${lnk}</div>${loc.detail?'<div class="details" id="'+uid+'">'+loc.detail.replace(/\n/g,'<br>')+'</div>':''}</div></div>`;
+}
+
+function renderDay(idx) {
+  const d = DAYS.find(x=>x.id===idx); if(!d) return '';
+  const main = d.locations.filter(l=>l.time!=='—');
+  const alt = d.locations.filter(l=>l.time==='—');
+  let h = `<div class="day-head"><h2>${d.title}</h2><p>${d.date}</p></div>`;
+  if(main.length) { h += '<div class="section-head">行程</div><div class="timeline">'; main.forEach(l => h += locCard(l, idx)); h += '</div>'; }
+  if(alt.length) { h += '<div class="section-head">备选</div><div class="timeline">'; alt.forEach(l => h += locCard(l, idx)); h += '</div>'; }
+  return h;
+}
+
+let cur = 0;
+const tabsEl = document.getElementById('tabs');
+const contentEl = document.getElementById('content');
+
+DAYS.forEach(d => {
+  const btn = document.createElement('button');
+  btn.className = 'tab' + (d.id===0?' active':'');
+  btn.dataset.day = d.id;
+  btn.textContent = d.label;
+  tabsEl.appendChild(btn);
+});
+
+function go(idx) {
+  cur = idx;
+  tabsEl.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', +t.dataset.day===idx));
+  contentEl.innerHTML = idx===0 ? overviewContent() : renderDay(idx);
+  showDay(idx);
+  contentEl.scrollTo({top:0});
+  const tab = tabsEl.querySelector(`[data-day="${idx}"]`);
+  if(tab) tab.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+}
+
+function toggle(id) { const el=document.getElementById(id); if(el) el.classList.toggle('closed'); }
+
+tabsEl.addEventListener('click', e => { const t=e.target.closest('.tab'); if(t) go(+t.dataset.day); });
+
+go(0);
+
+/* ── Action Sheet for Navigation ── */
+const asOverlay = document.createElement('div');
+asOverlay.className = 'as-overlay';
+asOverlay.innerHTML = `<div class="as-sheet">
+  <div class="as-group" id="as-opts"></div>
+  <div class="as-group"><button class="as-item as-cancel" onclick="closeAS()">取消</button></div>
+</div>`;
+document.body.appendChild(asOverlay);
+asOverlay.addEventListener('click', e => { if (e.target === asOverlay) closeAS(); });
+
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+function amapAppUrl(name, lat, lng) {
+  const scheme = IS_IOS ? 'iosamap' : 'androidamap';
+  return `${scheme}://viewMap?sourceApplication=trip&poiname=${encodeURIComponent(name)}&lat=${lat}&lon=${lng}&dev=0`;
+}
+function amapWebUrl(name, lat, lng) {
+  return `https://uri.amap.com/marker?position=${lng},${lat}&name=${encodeURIComponent(name)}&src=trip&coordinate=wgs84&callnative=1`;
+}
+function openAmap(name, lat, lng) {
+  if (IN_APP_WEBVIEW) { window.open(amapWebUrl(name, lat, lng)); return; }
+  window.location.href = amapAppUrl(name, lat, lng);
+}
+
+function openAS(name, lat, lng, gmap) {
+  const q = gmap || encodeURIComponent(name);
+  const encName = encodeURIComponent(name);
+  const safeName = name.replace(/'/g,"\\'");
+  const appleUrl = IN_APP_WEBVIEW
+    ? `https://maps.apple.com/?q=${lat},${lng}&ll=${lat},${lng}&name=${encName}`
+    : `maps://maps.apple.com/?q=${lat},${lng}&name=${encName}`;
+  const googleUrl = `https://www.google.com/maps/search/?api=1&query=${q}`;
+  document.getElementById('as-opts').innerHTML =
+    `<button class="as-item" onclick="window.open('${appleUrl}');closeAS()">🍎 Apple Maps</button>` +
+    `<button class="as-item" onclick="window.open('${googleUrl}');closeAS()">🗺️ Google Maps</button>` +
+    `<button class="as-item" onclick="openAmap('${safeName}',${lat},${lng});closeAS()">🧭 高德地图 App</button>`;
+  asOverlay.classList.add('show');
+}
+function closeAS() { asOverlay.classList.remove('show'); }
+</script>
+</body>
+</html>
