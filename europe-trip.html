@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>法国 · 瑞士 · 意大利 — 欧洲三国 19 日深度行程</title>
-<meta name="description" content="2025.9.23 - 10.11 法国巴黎 → 瑞士巴塞尔/卢塞恩/因特拉肯/少女峰/采尔马特 → 意大利米兰/威尼斯/佛罗伦萨/罗马">
+<title>西班牙 · 法国 · 瑞士 · 意大利 — 欧洲四国 19 日深度行程</title>
+<meta name="description" content="2025.9.23 - 10.11 西班牙巴塞罗那 → 法国巴黎 → 瑞士巴塞尔/卢塞恩/因特拉肯/少女峰/采尔马特 → 意大利米兰/威尼斯/佛罗伦萨/罗马">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -221,27 +221,27 @@ const DAYS = [
   { id: 0, label: '总览', color: '#0071e3', locations: [] },
 
   // ── D1 ──
-  { id: 1, label: 'D1', date: '9.23 周三', title: '抵达巴塞罗那', color: '#ff9500', locations: [
-    { name: '巴塞罗那机场 (BCN)', lat: 41.2974, lng: 2.0833, type: 'transport', time: '中午', desc: '飞机抵达巴塞罗那', detail: '入关取行李，乘 Aerobús 或地铁 L9 前往市区', gmap: 'Barcelona+Airport+BCN' },
-    { name: '圣家堂 Sagrada Família', lat: 41.4036, lng: 2.1744, type: 'spot', time: '下午', desc: '高迪未完成的旷世杰作，务必提前预约门票', detail: '登塔需额外预约，建议选诞生立面塔楼。地铁 L2/L5 Sagrada Família 站直达', gmap: 'Sagrada+Família+Barcelona', reserve: 'https://sagradafamilia.org/en/tickets' },
+  { id: 1, label: 'D1', date: '9.23 周三', title: '北京→巴塞罗那', color: '#ff9500', locations: [
+    { name: '北京→巴塞罗那 海航 HU491', lat: 41.2974, lng: 2.0833, type: 'transport', time: '中午', desc: '经布鲁塞尔中转，中午抵达巴塞罗那', detail: '✈️ 已出票 ¥9414/2人。入关取行李，乘 Aerobús 或地铁 L9 前往市区', gmap: 'Barcelona+Airport+BCN' },
+    { name: '圣家堂 Sagrada Família', lat: 41.4036, lng: 2.1744, type: 'spot', time: '下午', desc: '高迪未完成的旷世杰作，已预约 ✅', detail: '登塔需额外预约，建议选诞生立面塔楼。地铁 L2/L5 Sagrada Família 站直达', gmap: 'Sagrada+Família+Barcelona', reserve: 'https://sagradafamilia.org/en/tickets' },
     { name: '哥特区 Gothic Quarter', lat: 41.3839, lng: 2.1761, type: 'spot', time: '傍晚', desc: '中世纪老城漫步，巴塞罗那主教堂、国王广场', detail: '狭窄石板路，注意随身财物。可从兰布拉大道步行进入', gmap: 'Gothic+Quarter+Barcelona' },
     { name: '兰布拉大道 La Rambla', lat: 41.3802, lng: 2.1734, type: 'spot', time: '傍晚', desc: '巴塞罗那最著名的大道，街头艺人、花店、市场', detail: '波盖利亚市场 Mercat de la Boqueria 值得一逛，但注意扒手', gmap: 'La+Rambla+Barcelona' },
-    { name: '巴塞罗那酒店', lat: 41.3874, lng: 2.1686, type: 'hotel', time: '晚上', desc: '入住巴塞罗那酒店', gmap: 'hotel+Barcelona+Eixample' }
+    { name: 'Four Points Diagonal 酒店', lat: 41.3874, lng: 2.1686, type: 'hotel', time: '晚上', desc: '入住 Four Points Diagonal（2 晚）', detail: '酒店✅ 圣家堂✅', gmap: 'Four+Points+Diagonal+Barcelona' }
   ]},
 
   // ── D2 ──
   { id: 2, label: 'D2', date: '9.24 周四', title: '高迪建筑巡礼', color: '#ff9500', locations: [
-    { name: '米拉之家 Casa Milà', lat: 41.3954, lng: 2.1618, type: 'spot', time: '上午', desc: '高迪最后一座民用建筑，波浪形外墙和屋顶烟囱', detail: '又名 La Pedrera（采石场），屋顶必看。地铁 L3/L5 Diagonal 站', gmap: 'Casa+Milà+Barcelona', reserve: 'https://www.lapedrera.com/en/visits' },
-    { name: '巴特罗之家 Casa Batlló', lat: 41.3916, lng: 2.1650, type: 'spot', time: '下午', desc: '高迪的海洋童话世界，龙脊屋顶和彩色马赛克', detail: '位于格拉西亚大道 Passeig de Gràcia，与米拉之家步行 5 分钟', gmap: 'Casa+Batlló+Barcelona', reserve: 'https://www.casabatllo.es/en/' },
+    { name: '米拉之家 Casa Milà', lat: 41.3954, lng: 2.1618, type: 'spot', time: '上午', desc: '高迪最后一座民用建筑，波浪形外墙和屋顶烟囱', detail: '✅ 已预约。又名 La Pedrera（采石场），屋顶必看。地铁 L3/L5 Diagonal 站', gmap: 'Casa+Milà+Barcelona', reserve: 'https://www.lapedrera.com/en/visits' },
+    { name: '巴特罗之家 Casa Batlló', lat: 41.3916, lng: 2.1650, type: 'spot', time: '下午', desc: '高迪的海洋童话世界，龙脊屋顶和彩色马赛克', detail: '✅ 已预约。位于格拉西亚大道 Passeig de Gràcia，与米拉之家步行 5 分钟', gmap: 'Casa+Batlló+Barcelona', reserve: 'https://www.casabatllo.es/en/' },
     { name: '格拉西亚大道 Passeig de Gràcia', lat: 41.3935, lng: 2.1635, type: 'spot', time: '傍晚', desc: '巴塞罗那的香榭丽舍，奢侈品与设计师品牌云集', detail: '两侧高迪建筑林立，适合逛街和晚餐', gmap: 'Passeig+de+Gràcia+Barcelona' },
-    { name: '巴塞罗那酒店', lat: 41.3874, lng: 2.1686, type: 'hotel', time: '晚上', desc: '入住巴塞罗那酒店', gmap: 'hotel+Barcelona+Eixample' }
+    { name: 'Four Points Diagonal 酒店', lat: 41.3874, lng: 2.1686, type: 'hotel', time: '晚上', desc: '入住 Four Points Diagonal', detail: '米拉✅ 巴特罗✅', gmap: 'Four+Points+Diagonal+Barcelona' }
   ]},
 
   // ── D3 ──
-  { id: 3, label: 'D3', date: '9.25 周五', title: '巴塞罗那自由活动 → 抵达巴黎', color: '#007aff', locations: [
-    { name: '古埃尔公园 Park Güell', lat: 41.4145, lng: 2.1527, type: 'spot', time: '白天', desc: '高迪的童话花园，马赛克蜥蜴和波浪长椅', detail: '需提前购票预约。地铁 L3 Lesseps 站步行约 20 分钟。或巴塞罗那市区自由活动购物', gmap: 'Park+Güell+Barcelona', reserve: 'https://parkguell.barcelona/en' },
-    { name: '巴塞罗那机场 / 火车站', lat: 41.2974, lng: 2.0833, type: 'transport', time: '晚间', desc: '晚间出发前往巴黎，夜间抵达', detail: '晚间航班或夜班高铁，预留取行李入关时间', gmap: 'Barcelona+Airport+BCN' },
-    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '夜间', desc: '夜间抵达巴黎，入住休息', detail: '从巴塞罗那飞巴黎或高铁抵达。预留取行李和入关时间', gmap: 'hotel+Paris+center' }
+  { id: 3, label: 'D3', date: '9.25 周五', title: '巴塞罗那→巴黎', color: '#007aff', locations: [
+    { name: '古埃尔公园 Park Güell', lat: 41.4145, lng: 2.1527, type: 'spot', time: '白天', desc: '高迪的童话花园，马赛克蜥蜴和波浪长椅', detail: '✅ 已预约。地铁 L3 Lesseps 站步行约 20 分钟。或巴塞罗那市区自由活动购物', gmap: 'Park+Güell+Barcelona', reserve: 'https://parkguell.barcelona/en' },
+    { name: '巴塞罗那机场 (BCN)', lat: 41.2974, lng: 2.0833, type: 'transport', time: '晚间', desc: '✈️ 伏林航空 VY8016 飞巴黎', detail: '已出票 ¥1272/2人。预留取行李入关时间', gmap: 'Barcelona+Airport+BCN' },
+    { name: 'Novotel 凡尔赛门酒店', lat: 48.8320, lng: 2.2830, type: 'hotel', time: '夜间', desc: '抵达巴黎，入住 Novotel 凡尔赛门（4 晚）', detail: '古埃尔✅', gmap: 'Novotel+Paris+Porte+de+Versailles' }
   ]},
 
   // ── D4 ──
@@ -251,7 +251,7 @@ const DAYS = [
     { name: '协和广场 Place de la Concorde', lat: 48.8656, lng: 2.3211, type: 'spot', time: '~15:00', desc: '巴黎最大广场，卢克索方尖碑，短暂停留', detail: '地铁 M1/M8/M12 Concorde 站。从奥赛沿塞纳河步行约 二三 分钟', gmap: 'Place+de+la+Concorde+Paris' },
     { name: '凯旋门 Arc de Triomphe', lat: 48.8738, lng: 2.2950, type: 'spot', time: '~15:30', desc: '只外观，不登顶。香榭丽舍大道西端', detail: '地铁 M1 Charles de Gaulle-Étoile 站。从协和广场 M1 直达', gmap: 'Arc+de+Triomphe+Paris' },
     { name: '埃菲尔铁塔 Tour Eiffel', lat: 48.8584, lng: 2.2945, type: 'spot', time: '傍晚~日落', desc: '战神广场看日落，等到天黑看整点闪灯', detail: '闪灯在日落后整点开始，持续 5 分钟。地铁 M6 Bir-Hakeim 或 RER C Champ de Mars', gmap: 'Tour+Eiffel+Paris' },
-    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '晚上', desc: '返回巴黎酒店', gmap: 'hotel+Paris+center' }
+    { name: 'Novotel 凡尔赛门酒店', lat: 48.8320, lng: 2.2830, type: 'hotel', time: '晚上', desc: '返回 Novotel 凡尔赛门', detail: '奥赛✅', gmap: 'Novotel+Paris+Porte+de+Versailles' }
   ]},
 
   // ── D5 ──
@@ -262,7 +262,7 @@ const DAYS = [
     { name: '巴黎歌剧院 Opéra Garnier', lat: 48.8720, lng: 2.3316, type: 'spot', time: '~14:00', desc: '外观打卡，新巴洛克风格杰作', detail: '地铁 M3/M7/M8 Opéra 站。如时间充裕可购票入内参观', gmap: 'Opéra+Garnier+Paris' },
     { name: '蒙马特高地 Montmartre', lat: 48.8867, lng: 2.3431, type: 'spot', time: '16:00', desc: '错峰上高地，圣心大教堂、小丘广场，看日落俯瞰巴黎', detail: '避开了 14-16 点人流高峰。地铁 M12 Abbesses 或 M2 Anvers。注意保管随身财物，警惕手环骗局', gmap: 'Montmartre+Paris' },
     { name: '蒙马特晚餐', lat: 48.8860, lng: 2.3405, type: 'food', time: '日落', desc: '下山后在蒙马特周边晚餐', detail: '推荐 Rue des Abbesses 或 Rue Lepic 的法式小馆', gmap: 'restaurant+Montmartre+Paris' },
-    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '晚上', desc: '返回巴黎酒店', gmap: 'hotel+Paris+center' }
+    { name: 'Novotel 凡尔赛门酒店', lat: 48.8320, lng: 2.2830, type: 'hotel', time: '晚上', desc: '返回 Novotel 凡尔赛门', detail: '橘园✅', gmap: 'Novotel+Paris+Porte+de+Versailles' }
   ]},
 
   // ── D6 ──
@@ -272,15 +272,15 @@ const DAYS = [
     { name: '圣礼拜堂 Sainte-Chapelle', lat: 48.8554, lng: 2.3450, type: 'spot', time: '16:00', desc: '巴黎最美的彩绘玻璃教堂，16:00 入场', detail: '位于司法宫 Palais de Justice 内，需过安检。务必准时', gmap: 'Sainte+Chapelle+Paris', reserve: 'https://www.sainte-chapelle.fr/en' },
     { name: '巴黎圣母院外景', lat: 48.8530, lng: 2.3499, type: 'spot', time: '~17:00', desc: '巴黎圣母院外观，仍在修复中', detail: '从圣礼拜堂步行 5 分钟。可在广场和塞纳河畔拍照', gmap: 'Notre+Dame+de+Paris' },
     { name: '西岱岛 & 塞纳河闲逛', lat: 48.8535, lng: 2.3480, type: 'spot', time: '傍晚', desc: '西岱岛漫步，塞纳河畔散步', detail: '可逛 Île Saint-Louis 的贝蒂咏冰淇淋 Berthillon', gmap: 'Île+de+la+Cité+Paris' },
-    { name: '巴黎酒店', lat: 48.8566, lng: 2.3522, type: 'hotel', time: '晚上', desc: '返回巴黎酒店', gmap: 'hotel+Paris+center' }
+    { name: 'Novotel 凡尔赛门酒店', lat: 48.8320, lng: 2.2830, type: 'hotel', time: '晚上', desc: '返回 Novotel 凡尔赛门', detail: '卢浮宫✅ 圣礼拜堂✅', gmap: 'Novotel+Paris+Porte+de+Versailles' }
   ]},
 
   // ── D7 ──
   { id: 7, label: 'D7', date: '9.29 周二', title: '凡尔赛宫 → 巴塞尔', color: '#007aff', locations: [
-    { name: '凡尔赛宫 Château de Versailles', lat: 48.8049, lng: 2.1204, type: 'spot', time: '09:00', desc: '09:00 入场，全套：宫殿 + 花园 + 大小特里亚农，约 5-6h', detail: '必须抢 09:00 时段。RER C 线 Versailles Château Rive Gauche 站。提前线上购票预约', gmap: 'Château+de+Versailles', reserve: 'https://en.chateauversailles.fr/' },
+    { name: '凡尔赛宫 Château de Versailles', lat: 48.8049, lng: 2.1204, type: 'spot', time: '09:00', desc: '09:00 入场，全套：宫殿 + 花园 + 大小特里亚农，约 5-6h', detail: '✅ 已预约。必须抢 09:00 时段。RER C 线 Versailles Château Rive Gauche 站', gmap: 'Château+de+Versailles', reserve: 'https://en.chateauversailles.fr/' },
     { name: '凡尔赛 → 巴黎里昂站', lat: 48.8448, lng: 2.3735, type: 'transport', time: '15:30', desc: '离开凡尔赛，RER C 回巴黎里昂站', detail: 'RER C 约 40 分钟。预留充足换乘时间', gmap: 'Gare+de+Lyon+Paris' },
-    { name: 'TGV Lyria 巴黎 → 巴塞尔', lat: 47.5474, lng: 7.5900, type: 'transport', time: '傍晚', desc: 'TGV Lyria 前往巴塞尔，约 3h', detail: '买 17 点左右班次。提前购票，建议提前 30 分钟到站', gmap: 'Basel+SBB+station', reserve: 'https://www.sncf-connect.com/en-en/tgv-lyria' },
-    { name: '巴塞尔酒店', lat: 47.5584, lng: 7.5886, type: 'hotel', time: '晚上', desc: '抵达巴塞尔，入住酒店', detail: '抵达巴塞尔较晚，直接入住休息', gmap: 'hotel+Basel+SBB' }
+    { name: 'TGV Lyria 巴黎 → 巴塞尔', lat: 47.5474, lng: 7.5900, type: 'transport', time: '18:22', desc: '🚄 TGV Lyria 18:22–21:26 前往巴塞尔', detail: '已出票 ¥1261。提前 30 分钟到站', gmap: 'Basel+SBB+station', reserve: 'https://www.sncf-connect.com/en-en/tgv-lyria' },
+    { name: 'ibis 巴塞尔班霍夫酒店', lat: 47.5584, lng: 7.5886, type: 'hotel', time: '晚上', desc: '抵达巴塞尔，入住 ibis 巴塞尔班霍夫（1 晚）', detail: '凡尔赛✅ TGV✅', gmap: 'ibis+Basel+Bahnhof' }
   ]},
 
   // ── D8 ──
@@ -292,7 +292,7 @@ const DAYS = [
     { name: '黄金列车 Luzern-Interlaken Express', lat: 46.7856, lng: 8.1597, type: 'transport', time: '下午', desc: '卢塞恩发车，坐右侧，约 2h', detail: '可选 B：龙疆 Lungern 下车玩 1-2h（龙疆湖+S 湾观景台）；布里恩茨 Brienz 下车玩 1-1.5h（湖边+木雕小镇）。A 和 B 二选一，C 基本没时间', gmap: 'Lungern+Switzerland' },
     { name: '因特拉肯东站 Interlaken Ost', lat: 46.6904, lng: 7.8688, type: 'transport', time: '傍晚', desc: '抵达因特拉肯东站，入住', detail: '可选 C：因特拉肯周边三选一（哈德昆/格林德瓦/图恩湖+施皮茨），基本没时间', gmap: 'Interlaken+Ost+station' },
     { name: '超市采购', lat: 46.6870, lng: 7.8595, type: 'food', time: '晚上', desc: 'Coop / Migros 采购次日少女峰干粮', detail: '因特拉肯东站附近有 Coop 超市，山上物价高建议提前采购', gmap: 'Coop+Interlaken+Ost' },
-    { name: '因特拉肯酒店', lat: 46.6904, lng: 7.8688, type: 'hotel', time: '晚上', desc: '入住因特拉肯东站酒店', gmap: 'hotel+Interlaken+Ost' }
+    { name: '圣乔治皇家 - 美憬阁酒店', lat: 46.6904, lng: 7.8688, type: 'hotel', time: '晚上', desc: '入住圣乔治皇家 - 美憬阁（2 晚）', detail: '酒店✅ 通票⏳', gmap: 'Hotel+Royal+St+Georges+Interlaken' }
   ]},
 
   // ── D9 ──
@@ -301,7 +301,7 @@ const DAYS = [
     { name: '格林德瓦航站楼 Grindelwald Terminal', lat: 46.6237, lng: 8.0388, type: 'transport', time: '07:30', desc: '换乘艾格快线 Eiger Express 缆车', detail: '登山座位必须线上预约。通票 75 折，早安票有折扣', gmap: 'Grindelwald+Terminal', reserve: 'https://www.jungfrau.ch/en-gb/jungfraujoch-top-of-europe/' },
     { name: '少女峰 Jungfraujoch', lat: 46.5474, lng: 7.9833, type: 'spot', time: '08:30', desc: '欧洲之巅 3454m，山顶游玩 3h', detail: '斯芬克斯观景台→万年冰宫→冰川平台→简餐。山顶带厚外套、放慢动作防高反', gmap: 'Jungfraujoch+Top+of+Europe' },
     { name: '劳特布伦嫩 Lauterbrunnen', lat: 46.5936, lng: 7.9091, type: 'spot', time: '14:00', desc: '瀑布谷，施陶巴赫瀑布', detail: '从少女峰下山经 Kleine Scheidegg 换乘到 Lauterbrunnen。72 条瀑布的山谷', gmap: 'Lauterbrunnen+waterfall' },
-    { name: '因特拉肯酒店', lat: 46.6904, lng: 7.8688, type: 'hotel', time: '16:30', desc: '返回因特拉肯', gmap: 'hotel+Interlaken+Ost' }
+    { name: '圣乔治皇家 - 美憬阁酒店', lat: 46.6904, lng: 7.8688, type: 'hotel', time: '16:30', desc: '返回圣乔治皇家 - 美憬阁', detail: '通票⏳ 座位⏳', gmap: 'Hotel+Royal+St+Georges+Interlaken' }
   ]},
 
   // ── D10 ──
@@ -309,10 +309,9 @@ const DAYS = [
     { name: '因特拉肯东站', lat: 46.6904, lng: 7.8688, type: 'transport', time: '06:30', desc: '带全部行李出发，前往采尔马特', detail: '因特拉肯→采尔马特约 2.5h，需在 Spiez 和 Visp 换乘', gmap: 'Interlaken+Ost+station' },
     { name: '采尔马特 Zermatt', lat: 46.0207, lng: 7.7491, type: 'transport', time: '09:00', desc: '抵达采尔马特，大件行李寄存车站储物柜', detail: '无车小镇，只有电瓶车和马车。通票 5 折', gmap: 'Zermatt+station' },
     { name: '戈尔内格拉特 Gornergrat', lat: 45.9833, lng: 7.7833, type: 'spot', time: '09:15', desc: '齿轨火车上山 33min，山顶游玩 2h', detail: '观景台近看马特洪峰+29 座雪山。Rotenboden 站下车去 Riffelsee 湖拍马特洪峰倒影', gmap: 'Gornergrat+Zermatt' },
-    { name: '采尔马特小镇', lat: 46.0207, lng: 7.7491, type: 'food', time: '12:20', desc: '下山，小镇快速午餐，取行李', detail: 'D4 最赶，务必查天气预报。马特洪峰被云遮则放弃采尔马特直接去米兰', gmap: 'Zermatt+village' },
-    { name: '米兰 Centrale', lat: 45.4858, lng: 9.2047, type: 'transport', time: '17:00-17:30', desc: '抵达米兰中央车站', detail: '采尔马特→米兰约 4h。通票覆盖到 Domodossola 边境，意段单独购票 €20-30', gmap: 'Milano+Centrale+station' },
-    { name: '大教堂广场夜景', lat: 45.4641, lng: 9.1905, type: 'spot', time: '傍晚', desc: '大教堂广场夜景', detail: '米兰大教堂 Duomo 夜间灯光极美，广场周边餐厅众多', gmap: 'Piazza+del+Duomo+Milano' },
-  { name: '米兰酒店', lat: 45.4642, lng: 9.1900, type: 'hotel', time: '晚上', desc: '入住米兰酒店', gmap: 'hotel+Milan+Duomo' }
+    { name: '采尔马特小镇', lat: 46.0207, lng: 7.7491, type: 'food', time: '12:20', desc: '下山，小镇快速午餐，取行李', detail: '最赶的一天，务必查天气预报。马特洪峰被云遮则放弃采尔马特直接去米兰', gmap: 'Zermatt+village' },
+    { name: '采尔马特→Domodossola→米兰', lat: 45.4858, lng: 9.2047, type: 'transport', time: '20:30', desc: '🚄 意铁 Domodossola→米兰 20:30–22:50', detail: '已出票 ¥262。瑞士段通票覆盖至 Domodossola 边境', gmap: 'Milano+Centrale+station' },
+    { name: 'Hilton Garden Inn North 酒店', lat: 45.5000, lng: 9.1800, type: 'hotel', time: '23:30', desc: '抵达米兰，入住 Hilton Garden Inn North（2 晚 ¥2572.75）', detail: '意铁✅ 酒店✅', gmap: 'Hilton+Garden+Inn+Milan+North' }
   ]},
 
   // ── D11 ──
@@ -324,42 +323,42 @@ const DAYS = [
     { name: '布雷拉街区 Brera', lat: 45.4716, lng: 9.1878, type: 'spot', time: '15:00', desc: '米兰文艺街区闲逛', detail: '石板小巷、画廊、精品店。从大教堂步行约 15 分钟', gmap: 'Brera+Milano' },
     { name: '布雷拉画廊 Pinacoteca di Brera', lat: 45.4719, lng: 9.1877, type: 'spot', time: '16:00', desc: '拉斐尔、卡拉瓦乔作品，1.5h', detail: '建议预约 16:00。意大利重要美术馆之一', gmap: 'Pinacoteca+di+Brera+Milano', reserve: 'https://pinacotecabrera.org/en/' },
     { name: '布雷拉街区晚餐', lat: 45.4716, lng: 9.1878, type: 'food', time: '18:00', desc: '布雷拉街区晚餐', detail: '米兰文艺街区，推荐当地小馆', gmap: 'Brera+Milano+restaurant' },
-    { name: '米兰酒店', lat: 45.4642, lng: 9.1900, type: 'hotel', time: '晚上', desc: '入住米兰酒店', gmap: 'hotel+Milan+Duomo' }
+    { name: 'Hilton Garden Inn North 酒店', lat: 45.5000, lng: 9.1800, type: 'hotel', time: '晚上', desc: '返回 Hilton Garden Inn North', detail: '大教堂登顶✅（€44 不可退） 布雷拉✅', gmap: 'Hilton+Garden+Inn+Milan+North' }
   ]},
 
   // ── D12 ──
   { id: 12, label: 'D12', date: '10.4 周日', title: '米兰 → 威尼斯 + 外岛游', color: '#af52de', locations: [
-    { name: '米兰 Centrale', lat: 45.4858, lng: 9.2047, type: 'transport', time: '上午', desc: '退房，坐高铁 Frecciarossa 去威尼斯', detail: '建议 10:00-11:00 发车，约 2h15。提前买早鸟票 €19.90 起', gmap: 'Milano+Centrale+station' },
-    { name: '威尼斯主岛 Venezia S. Lucia', lat: 45.4410, lng: 12.3205, type: 'transport', time: '中午', desc: '抵达威尼斯主岛车站', detail: '住主岛 S. Lucia，不要住 Mestre。出站即是大运河', gmap: 'Venezia+Santa+Lucia+station' },
-    { name: '玻璃岛 Murano', lat: 45.4584, lng: 12.3520, type: 'spot', time: '下午', desc: '看玻璃吹制表演，1h', detail: '从主岛坐船约 20 分钟。可参观玻璃工厂看吹制表演。买 ACTV 交通船票', gmap: 'Murano+Venezia' },
+    { name: '米兰 Centrale', lat: 45.4858, lng: 9.2047, type: 'transport', time: '上午', desc: '退房，🚄 高铁 07:45 一等座去威尼斯 Mestre', detail: '已出票 ¥417，PNR 2929147766。约 2h15', gmap: 'Milano+Centrale+station' },
+    { name: '威尼斯 Mestre 站', lat: 45.4825, lng: 12.2308, type: 'transport', time: '上午', desc: '抵达威尼斯 Mestre（大陆），寄存行李', detail: '住大陆 Mestre，主岛火车 10min €1.45。水上巴士现场买', gmap: 'Venezia+Mestre+station' },
+    { name: '玻璃岛 Murano', lat: 45.4584, lng: 12.3520, type: 'spot', time: '下午', desc: '看玻璃吹制表演，1h', detail: '从主岛坐船约 20 分钟。可参观玻璃工厂看吹制表演', gmap: 'Murano+Venezia' },
     { name: '彩色岛 Burano', lat: 45.4856, lng: 12.4175, type: 'spot', time: '下午', desc: '彩色房子 + 蕾丝，1.5h', detail: '从 Murano 继续坐船。岛上每栋房子颜色不同，拍照圣地', gmap: 'Burano+Venezia' },
     { name: '学院桥 Accademia', lat: 45.4317, lng: 12.3290, type: 'spot', time: '傍晚', desc: '看大运河日落最佳位置', detail: '木桥横跨大运河，日落时分极美', gmap: 'Ponte+dell+Accademia+Venezia' },
     { name: '威尼斯晚餐', lat: 45.4390, lng: 12.3320, type: 'food', time: '晚上', desc: '海鲜意面、墨鱼面', detail: '推荐远离圣马可广场的小巷餐厅，性价比更高', gmap: 'restaurant+Venezia+seafood' },
-    { name: '威尼斯酒店', lat: 45.4375, lng: 12.3350, type: 'hotel', time: '晚上', desc: '入住威尼斯主岛酒店', gmap: 'hotel+Venezia+centro' }
+    { name: 'Novotel Mestre Castellana 酒店', lat: 45.4825, lng: 12.2308, type: 'hotel', time: '晚上', desc: '返回 Mestre，入住 Novotel Mestre Castellana（2 晚 ¥1557.78）', detail: '高铁✅ 酒店✅。主岛火车 10min €1.45', gmap: 'Novotel+Venezia+Mestre+Castellana' }
   ]},
 
   // ── D13 ──
   { id: 13, label: 'D13', date: '10.5 周一', title: '威尼斯主岛深度游', color: '#af52de', locations: [
-    { name: '圣马可广场 Piazza San Marco', lat: 45.4343, lng: 12.3385, type: 'spot', time: '09:00', desc: '欧洲最美客厅，拿破仑赞誉', detail: '广场上有圣马可大教堂、钟楼、总督宫。建议早到避开人流', gmap: 'Piazza+San+Marco+Venezia' },
-    { name: '圣马可大教堂 Basilica di San Marco', lat: 45.4346, lng: 12.3397, type: 'spot', time: '09:30', desc: '金色马赛克穹顶，拜占庭风格', detail: '免费进入，但建议预约免排队。内部金色马赛克令人震撼', gmap: 'Basilica+di+San+Marco+Venezia' },
-    { name: '总督宫 Palazzo Ducale', lat: 45.4337, lng: 12.3403, type: 'spot', time: '10:30', desc: '叹息桥 + 黄金阶梯，1.5h', detail: '建议预约 10:30。叹息桥连接总督宫和监狱，可从内部走过', gmap: 'Palazzo+Ducale+Venezia', reserve: 'https://palazzoducale.visitmuve.it/' },
-    { name: '里亚托桥 + 里亚托市场', lat: 45.4380, lng: 12.3359, type: 'spot', time: '12:00', desc: '威尼斯最著名大桥 + 海鲜水果市场', detail: '桥上可俯瞰大运河。里亚托市场有新鲜海鲜和水果，体验当地生活', gmap: 'Ponte+di+Rialto+Venezia' },
-    { name: '主岛闲逛购物', lat: 45.4360, lng: 12.3330, type: 'spot', time: '下午', desc: '主岛小巷漫步、购物', detail: '威尼斯第 2 晚，今天不移动。可逛面具店、玻璃工艺品店', gmap: 'Venezia+shopping' },
-    { name: '大运河边看日落', lat: 45.4375, lng: 12.3350, type: 'spot', time: '傍晚', desc: '大运河边散步，看夕阳', detail: '推荐在里亚托桥附近或学院桥 Accademia 看日落', gmap: 'Canal+Grande+Venezia' },
+    { name: '圣马可广场 Piazza San Marco', lat: 45.4343, lng: 12.3385, type: 'spot', time: '09:30', desc: '欧洲最美客厅，拿破仑赞誉', detail: '广场上有圣马可大教堂、钟楼、总督宫。建议早到避开人流', gmap: 'Piazza+San+Marco+Venezia' },
+    { name: '圣马可钟楼 Campanile', lat: 45.4340, lng: 12.3390, type: 'spot', time: '09:30', desc: '钟楼登顶（可选，现场 €10）', detail: '俯瞰威尼斯全景，电梯登顶无需爬楼', gmap: 'Campanile+di+San+Marco+Venezia' },
+    { name: '总督宫 Palazzo Ducale', lat: 45.4337, lng: 12.3403, type: 'spot', time: '10:45', desc: '叹息桥 + 黄金阶梯，1.5h', detail: '✅ 联票 €70。叹息桥连接总督宫和监狱，可从内部走过', gmap: 'Palazzo+Ducale+Venezia', reserve: 'https://palazzoducale.visitmuve.it/' },
+    { name: '圣马可大教堂 Basilica di San Marco', lat: 45.4346, lng: 12.3397, type: 'spot', time: '12:30', desc: '金色马赛克穹顶，拜占庭风格', detail: '✅ 已预约 €20。内部金色马赛克令人震撼', gmap: 'Basilica+di+San+Marco+Venezia' },
+    { name: '科雷尔博物馆 Museo Correr', lat: 45.4335, lng: 12.3375, type: 'spot', time: '13:50', desc: '威尼斯历史与艺术博物馆', detail: '位于圣马可广场，联票包含', gmap: 'Museo+Correr+Venezia' },
+    { name: '里亚托桥 + 里亚托市场', lat: 45.4380, lng: 12.3359, type: 'spot', time: '15:00', desc: '威尼斯最著名大桥 + 海鲜水果市场', detail: '桥上可俯瞰大运河。里亚托市场有新鲜海鲜和水果，体验当地生活', gmap: 'Ponte+di+Rialto+Venezia' },
+    { name: '主岛闲逛购物', lat: 45.4360, lng: 12.3330, type: 'spot', time: '下午', desc: '主岛小巷漫步、购物', detail: '可逛面具店、玻璃工艺品店', gmap: 'Venezia+shopping' },
     { name: '威尼斯晚餐', lat: 45.4390, lng: 12.3320, type: 'food', time: '晚上', desc: '海鲜意面、墨鱼面', detail: '推荐远离圣马可广场的小巷餐厅，性价比更高', gmap: 'restaurant+Venezia+seafood' },
-    { name: '威尼斯酒店', lat: 45.4375, lng: 12.3350, type: 'hotel', time: '晚上', desc: '入住威尼斯酒店', gmap: 'hotel+Venezia+centro' }
+    { name: 'Novotel Mestre Castellana 酒店', lat: 45.4825, lng: 12.2308, type: 'hotel', time: '晚上', desc: '返回 Mestre，入住 Novotel Mestre Castellana', detail: '总督宫联票✅（€70） 大教堂✅（€20）', gmap: 'Novotel+Venezia+Mestre+Castellana' }
   ]},
 
   // ── D14 ──
   { id: 14, label: 'D14', date: '10.6 周二', title: '威尼斯 → 佛罗伦萨', color: '#af52de', locations: [
-    { name: '威尼斯主岛补漏 / 购物', lat: 45.4375, lng: 12.3330, type: 'spot', time: '上午', desc: '主岛补漏或购物', detail: '可逛面具店、玻璃工艺品店，或补漏之前错过的景点', gmap: 'Venezia+shopping' },
-    { name: '威尼斯 S. Lucia', lat: 45.4410, lng: 12.3205, type: 'transport', time: '中午', desc: '退房，坐高铁去佛罗伦萨', detail: '建议 13:00-13:30 发车，约 2h。提前买早鸟票 €18.90 起', gmap: 'Venezia+Santa+Lucia+station' },
-    { name: '老桥 Ponte Vecchio', lat: 43.7679, lng: 11.2531, type: 'spot', time: '16:00', desc: '佛罗伦萨最古老的桥，珠宝店桥', detail: '桥上全是珠宝店，二战唯一未被炸毁的桥', gmap: 'Ponte+Vecchio+Firenze' },
-    { name: '领主广场 Piazza della Signoria', lat: 43.7696, lng: 11.2556, type: 'spot', time: '16:30', desc: '海神喷泉、大卫复制品', detail: '佛罗伦萨政治中心，露天雕塑博物馆。旧宫 Palazzo Vecchio 在此', gmap: 'Piazza+della+Signoria+Firenze' },
-    { name: '圣母百花大教堂 Duomo', lat: 43.7731, lng: 11.2560, type: 'spot', time: '17:00', desc: '外观打卡，布鲁内莱斯基穹顶', detail: '世界第四大教堂，穹顶是建筑奇迹。外观免费，登顶需预约', gmap: 'Duomo+di+Firenze' },
-    { name: '米开朗基罗广场 Piazzale Michelangelo', lat: 43.7629, lng: 11.2650, type: 'spot', time: '17:45', desc: '步行上山，18:30 看全城日落', detail: '步行上山约 20min。可俯瞰佛罗伦萨全景+阿诺河', gmap: 'Piazzale+Michelangelo+Firenze' },
-    { name: '佛罗伦萨晚餐', lat: 43.7700, lng: 11.2520, type: 'food', time: '19:30', desc: 'T 骨牛排 Bistecca + 牛肚包 Lampredotto', detail: 'T 骨牛排需提前订位。推荐 Trattoria 类餐厅', gmap: 'bistecca+alla+fiorientina+Firenze' },
-    { name: '佛罗伦萨酒店', lat: 43.7730, lng: 11.2500, type: 'hotel', time: '晚上', desc: '入住佛罗伦萨酒店', gmap: 'hotel+Firenze+centro' }
+    { name: '威尼斯 Mestre 站出发', lat: 45.4825, lng: 12.2308, type: 'transport', time: '07:30', desc: '退房，前往 Mestre 站', detail: '🚄 高铁 08:40–10:39 静音一等舱，已出票 ¥679', gmap: 'Venezia+Mestre+station' },
+    { name: '佛罗伦萨 SMN 站', lat: 43.7765, lng: 11.2476, type: 'transport', time: '10:39', desc: '抵达佛罗伦萨 SMN，酒店放行李', detail: 'Hilton Novoli 距 SMN 打车 8-12min', gmap: 'Firenze+Santa+Maria+Novella+station' },
+    { name: '老桥 Ponte Vecchio', lat: 43.7679, lng: 11.2531, type: 'spot', time: '下午', desc: '佛罗伦萨最古老的桥，珠宝店桥', detail: '桥上全是珠宝店，二战唯一未被炸毁的桥', gmap: 'Ponte+Vecchio+Firenze' },
+    { name: '领主广场 Piazza della Signoria', lat: 43.7696, lng: 11.2556, type: 'spot', time: '下午', desc: '海神喷泉、大卫复制品', detail: '佛罗伦萨政治中心，露天雕塑博物馆。旧宫 Palazzo Vecchio 在此', gmap: 'Piazza+della+Signoria+Firenze' },
+    { name: '圣母百花大教堂 Duomo', lat: 43.7731, lng: 11.2560, type: 'spot', time: '下午', desc: '外观打卡，布鲁内莱斯基穹顶', detail: '世界第四大教堂，穹顶是建筑奇迹。外观免费，登顶需预约', gmap: 'Duomo+di+Firenze' },
+    { name: '佛罗伦萨晚餐', lat: 43.7700, lng: 11.2520, type: 'food', time: '晚上', desc: 'T 骨牛排 Bistecca + 牛肚包 Lampredotto', detail: 'T 骨牛排需提前订位。推荐 Trattoria 类餐厅', gmap: 'bistecca+alla+fiorientina+Firenze' },
+    { name: 'Hilton Novoli 酒店', lat: 43.7900, lng: 11.2300, type: 'hotel', time: '晚上', desc: '入住 Hilton Novoli（2 晚，需换房）', detail: '高铁✅ 酒店✅。10.6-7 双床 ¥1254.95 + 10.7-8 特大床 ¥1472.27', gmap: 'Hilton+Florence+Metropole' }
   ]},
 
   // ── D15 ──
@@ -370,53 +369,53 @@ const DAYS = [
     { name: '学院美术馆 Galleria dell\'Accademia', lat: 43.7767, lng: 11.2585, type: 'spot', time: '15:30', desc: '米开朗基罗《大卫》真迹，1h', detail: '✅ 已预约 15:30（€48/2人）。三馆从南往北顺路', gmap: 'Galleria+dell+Accademia+Firenze', reserve: 'https://www.galleriaaccademiafirenze.it/' },
     { name: '自由活动', lat: 43.7720, lng: 11.2550, type: 'spot', time: '16:30', desc: '圣十字教堂 / 美第奇礼拜堂 / 老桥日落 / 洗礼堂', detail: '可选：圣十字教堂（米开朗基罗墓）、美第奇礼拜堂（《昼》《夜》《晨》《昏》）、老桥日落、洗礼堂', gmap: 'Firenze+centro' },
     { name: '佛罗伦萨晚餐 + Gelato', lat: 43.7705, lng: 11.2530, type: 'food', time: '晚上', desc: '佛罗伦萨晚餐 + 手工冰淇淋 Gelato', detail: '推荐 Gelateria dei Neri 或 Vivoli', gmap: 'gelato+Firenze+centro' },
-    { name: '佛罗伦萨酒店', lat: 43.7730, lng: 11.2500, type: 'hotel', time: '晚上', desc: '入住佛罗伦萨酒店', gmap: 'hotel+Firenze+centro' }
+    { name: 'Hilton Novoli 酒店', lat: 43.7900, lng: 11.2300, type: 'hotel', time: '晚上', desc: '返回 Hilton Novoli（需换房）', detail: '乌菲兹✅（€58） 穹顶✅（€60 Brunelleschi Pass 10.7-9 有效） 学院✅（€48）', gmap: 'Hilton+Florence+Metropole' }
   ]},
 
   // ── D16 ──
   { id: 16, label: 'D16', date: '10.8 周四', title: '佛罗伦萨 → 罗马', color: '#ff2d55', locations: [
     { name: '皮蒂宫 + 波波里花园', lat: 43.7652, lng: 11.2500, type: 'spot', time: '上午', desc: '美第奇宫殿 + 皇家园林，1.5-2h', detail: '或选择购物。皮蒂宫藏有拉斐尔和提香作品', gmap: 'Palazzo+Pitti+Firenze' },
-    { name: '佛罗伦萨 SMN 站', lat: 43.7765, lng: 11.2476, type: 'transport', time: '中午', desc: '退房，坐高铁去罗马', detail: '建议 13:00-13:30 发车，最快 1h30。提前买早鸟票 €12.90 起', gmap: 'Firenze+Santa+Maria+Novella+station' },
-    { name: '万神殿 Pantheon', lat: 41.8986, lng: 12.4768, type: 'spot', time: '16:00', desc: '2000 年穹顶，免费需预约', detail: '免费但需预约 16:00。穹顶中央圆孔是建筑奇迹', gmap: 'Pantheon+Roma', reserve: 'https://www.pantheonroma.com/' },
-    { name: '纳沃纳广场 Piazza Navona', lat: 41.8992, lng: 12.4731, type: 'spot', time: '16:45', desc: '四河喷泉（贝尼尼作品）', detail: '巴洛克风格广场，街头艺人云集。从万神殿步行约 5 分钟', gmap: 'Piazza+Navona+Roma' },
-    { name: '特莱维喷泉 Trevi', lat: 41.9009, lng: 12.4833, type: 'spot', time: '17:30', desc: '抛硬币许愿（背对喷泉右手过左肩）', detail: '罗马最著名的喷泉，建议傍晚时分前往', gmap: 'Fontana+di+Trevi+Roma' },
-    { name: '西班牙台阶 Spanish Steps', lat: 41.9057, lng: 12.4822, type: 'spot', time: '18:15', desc: '罗马假日取景地', detail: '连接西班牙广场和山上天主圣三教堂。不可坐在台阶上吃东西', gmap: 'Spanish+Steps+Roma' },
-    { name: '罗马晚餐', lat: 41.8960, lng: 12.4750, type: 'food', time: '晚上', desc: '碳烤意面 Carbonara、炸洋蓟 Carciofi', detail: '推荐 Trastevere 区或 Testaccio 区', gmap: 'carbonara+Roma+centro' },
-    { name: '罗马酒店', lat: 41.8980, lng: 12.4850, type: 'hotel', time: '晚上', desc: '入住罗马酒店。罗马开始 3 晚', gmap: 'hotel+Roma+centro' }
+    { name: '佛罗伦萨 SMN 站', lat: 43.7765, lng: 11.2476, type: 'transport', time: '10:59', desc: '退房，🚄 高铁 10:59–12:40 静音一等舱去罗马', detail: '已出票 ¥590。最快 1h40', gmap: 'Firenze+Santa+Maria+Novella+station' },
+    { name: '罗马 Termini 站', lat: 41.9009, lng: 12.5022, type: 'transport', time: '12:40', desc: '抵达罗马 Termini，酒店放行李', detail: 'Mercure Corso Trieste，A 线 Agnese-Annibaliano 步行 5min', gmap: 'Roma+Termini+station' },
+    { name: '特莱维喷泉 Trevi', lat: 41.9009, lng: 12.4833, type: 'spot', time: '下午', desc: '抛硬币许愿（背对喷泉右手过左肩）', detail: '罗马最著名的喷泉，建议下午前往', gmap: 'Fontana+di+Trevi+Roma' },
+    { name: '纳沃纳广场 Piazza Navona', lat: 41.8992, lng: 12.4731, type: 'spot', time: '下午', desc: '四河喷泉（贝尼尼作品）', detail: '巴洛克风格广场，街头艺人云集', gmap: 'Piazza+Navona+Roma' },
+    { name: '西班牙台阶 Spanish Steps', lat: 41.9057, lng: 12.4822, type: 'spot', time: '下午', desc: '罗马假日取景地', detail: '连接西班牙广场和山上天主圣三教堂。不可坐在台阶上吃东西', gmap: 'Spanish+Steps+Roma' },
+    { name: '博尔盖塞美术馆 Galleria Borghese', lat: 41.9142, lng: 12.4921, type: 'spot', time: '16:00', desc: '贝尼尼雕塑 + 卡拉瓦乔画作（待确认）', detail: '⏳ 待确认。需提前预约，限时 2h', gmap: 'Galleria+Borghese+Roma', reserve: 'https://www.galleriaborghese.it/' },
+    { name: 'Trastevere 晚餐', lat: 41.8875, lng: 12.4700, type: 'food', time: '晚上', desc: '特拉斯特维莱区晚餐', detail: '推荐 Da Enzo al 29 或周边地道小馆', gmap: 'Trastevere+restaurant+Roma' },
+    { name: 'Mercure Corso Trieste 酒店', lat: 41.9200, lng: 12.5100, type: 'hotel', time: '晚上', desc: '入住 Mercure Corso Trieste（3 晚）', detail: '高铁✅ 酒店✅ 博尔盖塞⏳。A 线 Agnese-Annibaliano 步行 5min', gmap: 'Mercure+Roma+Corso+Trieste' }
   ]},
 
   // ── D17 ──
   { id: 17, label: 'D17', date: '10.9 周五', title: '罗马古都一日', color: '#ff2d55', locations: [
-    { name: '斗兽场 Colosseo', lat: 41.8902, lng: 12.4922, type: 'spot', time: '08:30', desc: '含地下层 + 竞技场顶层，2h', detail: '建议 08:30 场次，第一批入场人最少。提前 1-2 周预约，含地下层的票更抢手', gmap: 'Colosseo+Roma', reserve: 'https://www.coopculture.it/en/' },
-    { name: '古罗马广场 Foro Romano', lat: 41.8925, lng: 12.4858, type: 'spot', time: '10:30', desc: '古罗马帝国中心，废墟中的辉煌', detail: '与斗兽场、帕拉蒂尼山买联票。穿舒适步行鞋', gmap: 'Foro+Romano+Roma' },
-    { name: '帕拉蒂尼山 Palatino', lat: 41.8897, lng: 12.4883, type: 'spot', time: '12:00', desc: '罗马七丘之首，俯瞰古罗马广场', detail: '罗马建城之地，曾是皇宫所在地', gmap: 'Palatino+Roma' },
-    { name: '罗马午餐', lat: 41.8920, lng: 12.4870, type: 'food', time: '13:00', desc: '斗兽场周边午餐', detail: '推荐 Monti 区或 Cavour 周边', gmap: 'restaurant+Colosseo+Roma' },
-    { name: '卡比托利欧广场 Campidoglio', lat: 41.8931, lng: 12.4828, type: 'spot', time: '14:30', desc: '米开朗基罗设计的广场 + 博物馆', detail: '卡比托利欧博物馆藏有母狼哺婴青铜像', gmap: 'Piazza+del+Campidoglio+Roma' },
-    { name: '真理之口 Bocca della Verità', lat: 41.8882, lng: 12.4815, type: 'spot', time: '16:00', desc: '罗马假日经典场景，拍照打卡', detail: '位于科斯美汀圣母教堂门廊。排队拍照，免费', gmap: 'Bocca+della+Verità+Roma' },
-    { name: '特拉斯特维莱区 Trastevere', lat: 41.8875, lng: 12.4700, type: 'spot', time: '17:00', desc: '罗马最文艺街区，漫步', detail: '石板小巷、常春藤墙、地道罗马小馆', gmap: 'Trastevere+Roma' },
+    { name: '斗兽场 Colosseo', lat: 41.8902, lng: 12.4922, type: 'spot', time: '10:15', desc: '含古罗马广场 + 帕拉蒂尼山 24h 联票，入场需护照', detail: '✅ 已预约 10:15（€18/人）。提前 1-2 周预约', gmap: 'Colosseo+Roma', reserve: 'https://www.coopculture.it/en/' },
+    { name: '古罗马广场 Foro Romano', lat: 41.8925, lng: 12.4858, type: 'spot', time: '12:30', desc: '古罗马帝国中心，废墟中的辉煌', detail: '与斗兽场、帕拉蒂尼山联票。穿舒适步行鞋', gmap: 'Foro+Romano+Roma' },
+    { name: '帕拉蒂尼山 Palatino', lat: 41.8897, lng: 12.4883, type: 'spot', time: '下午', desc: '罗马七丘之首，俯瞰古罗马广场', detail: '罗马建城之地，曾是皇宫所在地', gmap: 'Palatino+Roma' },
+    { name: '万神殿 Pantheon', lat: 41.8986, lng: 12.4768, type: 'spot', time: '14:00', desc: '2000 年穹顶，建筑奇迹', detail: '⏳ €7/人待买。穹顶中央圆孔是建筑奇迹', gmap: 'Pantheon+Roma', reserve: 'https://www.pantheonroma.com/' },
+    { name: '真理之口 Bocca della Verità', lat: 41.8882, lng: 12.4815, type: 'spot', time: '15:30', desc: '罗马假日经典场景，拍照打卡', detail: '位于科斯美汀圣母教堂门廊。排队拍照，免费', gmap: 'Bocca+della+Verità+Roma' },
+    { name: '特拉斯特维莱区 Trastevere', lat: 41.8875, lng: 12.4700, type: 'spot', time: '傍晚', desc: '罗马最文艺街区，漫步', detail: '石板小巷、常春藤墙、地道罗马小馆', gmap: 'Trastevere+Roma' },
     { name: 'Trastevere 晚餐', lat: 41.8875, lng: 12.4700, type: 'food', time: '晚上', desc: '特拉斯特维莱区晚餐', detail: '推荐 Da Enzo al 29 或周边地道小馆', gmap: 'Trastevere+restaurant+Roma' },
-    { name: '罗马酒店', lat: 41.8980, lng: 12.4850, type: 'hotel', time: '晚上', desc: '入住罗马酒店', gmap: 'hotel+Roma+centro' }
+    { name: 'Mercure Corso Trieste 酒店', lat: 41.9200, lng: 12.5100, type: 'hotel', time: '晚上', desc: '返回 Mercure Corso Trieste', detail: '斗兽场✅（€18/人） 万神殿⏳（€7/人待买）', gmap: 'Mercure+Roma+Corso+Trieste' }
   ]},
 
   // ── D18 ──
   { id: 18, label: 'D18', date: '10.10 周六', title: '梵蒂冈一日', color: '#ff2d55', locations: [
-    { name: '梵蒂冈博物馆 Musei Vaticani', lat: 41.9065, lng: 12.4536, type: 'spot', time: '09:00', desc: '西斯廷教堂天顶画《创世纪》、拉斐尔画室，3h', detail: '08:30 门口排队。必须提前 1-2 个月预约 09:00（极难抢，现在就订）！世界顶级博物馆', gmap: 'Musei+Vaticani+Roma', reserve: 'https://www.museivaticani.va/' },
+    { name: '梵蒂冈博物馆 Musei Vaticani', lat: 41.9065, lng: 12.4536, type: 'spot', time: '11:00', desc: '西斯廷教堂天顶画《创世纪》、拉斐尔画室，3h', detail: '✅ 已预约 10.10 11:00（订单 10734/2026-136）。世界顶级博物馆', gmap: 'Musei+Vaticani+Roma', reserve: 'https://www.museivaticani.va/' },
     { name: '西斯廷教堂 Cappella Sistina', lat: 41.9029, lng: 12.4545, type: 'spot', time: '12:00', desc: '米开朗基罗《最后的审判》', detail: '位于梵蒂冈博物馆内。禁止拍照，保持安静', gmap: 'Cappella+Sistina+Vaticano' },
     { name: '梵蒂冈午餐', lat: 41.9050, lng: 12.4550, type: 'food', time: '12:30', desc: '梵蒂冈周边午餐', detail: '推荐 Borgo Pio 街区或 Via Candia 的简餐', gmap: 'restaurant+Vaticano+Roma' },
-    { name: '圣彼得大教堂 Basilica di San Pietro', lat: 41.9022, lng: 12.4533, type: 'spot', time: '14:00', desc: '免费进入，登顶现场买票 1h', detail: '世界最大教堂。登顶看穹顶内部+俯瞰圣彼得广场，现场排队', gmap: 'Basilica+di+San+Pietro+Vaticano' },
+    { name: '圣彼得大教堂 Basilica di San Pietro', lat: 41.9022, lng: 12.4533, type: 'spot', time: '15:00', desc: '免费进入，登顶现场买票 1h', detail: '世界最大教堂。登顶看穹顶内部+俯瞰圣彼得广场，现场排队', gmap: 'Basilica+di+San+Pietro+Vaticano' },
     { name: '圣彼得广场 Piazza San Pietro', lat: 41.9023, lng: 12.4573, type: 'spot', time: '16:00', desc: '贝尼尼设计的椭圆形广场', detail: '284 根多立克柱廊环绕。梵蒂冈是独立国家', gmap: 'Piazza+San+Pietro+Vaticano' },
-    { name: '圣天使堡 Castel Sant\'Angelo', lat: 41.9031, lng: 12.4663, type: 'spot', time: '16:30', desc: '入内参观，1h，€14', detail: '从圣彼得广场沿协和大道步行约 10 分钟。现场买票 €14', gmap: 'Castel+Sant+Angelo+Roma' },
-    { name: '台伯河畔日落', lat: 41.9015, lng: 12.4650, type: 'spot', time: '18:00', desc: '台伯河畔散步，看日落', detail: '圣天使桥 Ponte Sant\'Angelo 是拍照最佳位置', gmap: 'Lungotevere+Roma' },
+    { name: '圣天使堡外观 Castel Sant\'Angelo', lat: 41.9031, lng: 12.4663, type: 'spot', time: '16:30', desc: '外观打卡，圣天使桥拍照', detail: '从圣彼得广场沿协和大道步行约 10 分钟。圣天使桥 Ponte Sant\'Angelo 是拍照最佳位置', gmap: 'Castel+Sant+Angelo+Roma' },
+    { name: '台伯河畔散步', lat: 41.9015, lng: 12.4650, type: 'spot', time: '傍晚', desc: '台伯河畔散步', detail: '罗马最后一天，享受河畔悠闲时光', gmap: 'Lungotevere+Roma' },
     { name: '罗马最后晚餐', lat: 41.8960, lng: 12.4750, type: 'food', time: '晚上', desc: '罗马最后一顿晚餐，整理行李', detail: '推荐 Amatriciana 或 Cacio e Pepe 意面', gmap: 'restaurant+Roma+centro' },
-    { name: '罗马酒店', lat: 41.8980, lng: 12.4850, type: 'hotel', time: '晚上', desc: '入住罗马酒店', gmap: 'hotel+Roma+centro' }
+    { name: 'Mercure Corso Trieste 酒店', lat: 41.9200, lng: 12.5100, type: 'hotel', time: '晚上', desc: '返回 Mercure Corso Trieste，整理行李', detail: '梵蒂冈✅（10.10 11:00，订单 10734/2026-136）', gmap: 'Mercure+Roma+Corso+Trieste' }
   ]},
 
   // ── D19 ──
   { id: 19, label: 'D19', date: '10.11 周日', title: '罗马最后半日 → 回国', color: '#ff2d55', locations: [
-    { name: '罗马市区自由补漏 / 购物', lat: 41.9035, lng: 12.4800, type: 'spot', time: '上午', desc: '市区自由补漏或购物（Via del Corso 商业街、Condotti 奢侈品街）', detail: '舍弃博尔盖塞美术馆。可逛西班牙广场周边或补漏之前错过的景点', gmap: 'Via+del+Corso+Roma' },
-    { name: '罗马 Termini 站', lat: 41.9009, lng: 12.5022, type: 'transport', time: '中午', desc: '退房，Leonardo Express 直达机场', detail: '32min，€14。机场建议提前 3h 到', gmap: 'Roma+Termini+station' },
-    { name: '菲乌米奇诺机场 FCO', lat: 41.8003, lng: 12.2389, type: 'transport', time: '下午/晚上', desc: '航班回国', detail: '退税在安检后。祝旅途愉快！', gmap: 'Fiumicino+Airport+Roma' }
-  ]}
+    { name: '罗马市区自由补漏 / 购物', lat: 41.9035, lng: 12.4800, type: 'spot', time: '上午', desc: '市区自由补漏或购物（Via del Corso 商业街、Condotti 奢侈品街）', detail: '可逛西班牙广场周边或补漏之前错过的景点', gmap: 'Via+del+Corso+Roma' },
+    { name: '罗马 Termini 站', lat: 41.9009, lng: 12.5022, type: 'transport', time: '上午', desc: '退房，Leonardo Express 直达 FCO 机场', detail: '32min，€14。08:35 前到 FCO 机场', gmap: 'Roma+Termini+station' },
+    { name: '菲乌米奇诺机场 FCO', lat: 41.8003, lng: 12.2389, type: 'transport', time: '11:35', desc: '✈️ 阿提哈德 11:35 起飞→阿布扎比中转 1h20m→北京大兴', detail: '已出票 ¥9717/2人。10.12 09:00 抵达北京大兴。退税在安检后。祝旅途愉快！', gmap: 'Fiumicino+Airport+Roma' }
+  ]},
 
 ];
 
@@ -426,23 +425,23 @@ const DAYS = [
 
 function overviewContent() {
   return `
-<div class="hero"><h1>法国 · 瑞士 · 意大利</h1><p class="subtitle">2025.9.23 — 10.11 · 欧洲三国 19 日深度行程</p></div>
+<div class="hero"><h1>西班牙 · 法国 · 瑞士 · 意大利</h1><p class="subtitle">2025.9.23 — 10.11 · 欧洲四国 19 日深度行程</p></div>
 <div class="info-grid">
   <div class="info-card"><div class="label">天数</div><div class="value">19 天</div></div>
-  <div class="info-card"><div class="label">国家</div><div class="value">法国 · 瑞士 · 意大利</div></div>
-  <div class="info-card"><div class="label">城市</div><div class="value">巴黎 → 巴塞尔 → 卢塞恩 → 因特拉肯 → 采尔马特 → 米兰 → 威尼斯 → 佛罗伦萨 → 罗马</div></div>
-  <div class="info-card"><div class="label">交通</div><div class="value">TGV Lyria · 黄金列车 · 齿轨火车 · 高铁 · 飞机</div></div>
+  <div class="info-card"><div class="label">国家</div><div class="value">西班牙 · 法国 · 瑞士 · 意大利</div></div>
+  <div class="info-card"><div class="label">城市</div><div class="value">巴塞罗那 → 巴黎 → 巴塞尔 → 卢塞恩 → 因特拉肯 → 采尔马特 → 米兰 → 威尼斯 → 佛罗伦萨 → 罗马</div></div>
+  <div class="info-card"><div class="label">交通</div><div class="value">国际航班 · TGV Lyria · 黄金列车 · 齿轨火车 · 高铁 · 飞机</div></div>
 </div>
 <div class="section-head">行程概览</div>
 <div class="day-list">${DAYS.slice(1).map(d=>`<div class="card" onclick="go(${d.id})"><div class="name"><span class="dot" style="background:${d.color}"></span>${d.label} · ${d.title}</div><div class="desc">${d.date}</div></div>`).join('')}</div>
 <div class="section-head">关键提醒</div>
 <div class="pay-summary">
   <h4>🎫 必须提前预约</h4>
-  <p>圣家堂、米拉之家、巴特罗之家、古埃尔公园、奥赛博物馆、橘园美术馆、卢浮宫、圣礼拜堂、凡尔赛宫、少女峰登山票、最后的晚餐、乌菲兹美术馆、学院美术馆、梵蒂冈博物馆 — <span class="warn">全部需提前线上购票预约</span></p>
+  <p>圣家堂、米拉之家、巴特罗之家、古埃尔公园、奥赛博物馆、橘园美术馆、卢浮宫、圣礼拜堂、凡尔赛宫、少女峰登山票、乌菲兹美术馆、学院美术馆、梵蒂冈博物馆 — <span class="warn">全部需提前线上购票预约</span></p>
 </div>
 <div class="pay-summary">
   <h4>🚂 交通关键</h4>
-  <p>巴黎→巴塞尔 TGV Lyria 提前购票（约 3h）；瑞士通票覆盖黄金列车、瑞吉山全程、少女峰 75 折、戈尔内格拉特 5 折；意大利高铁 Frecciarossa 早鸟票 €19 起；采尔马特→米兰意段单独购票 €20-30</p>
+  <p>北京→巴塞罗那 海航 HU491（已出票 ¥9414/2人）；巴塞罗那→巴黎 伏林 VY8016（已出票 ¥1272）；巴黎→巴塞尔 TGV Lyria 18:22–21:26（已出票 ¥1261）；瑞士通票覆盖黄金列车、瑞吉山全程、少女峰 75 折、戈尔内格拉特 5 折；意铁 Domodossola→米兰（已出票 ¥262）；意大利高铁（已出票）；罗马→北京 阿提哈德（已出票 ¥9717/2人）</p>
 </div>
 <div class="pay-summary">
   <h4>⚠️ 安全提醒</h4>
